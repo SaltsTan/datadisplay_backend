@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.basic.mapper.BasicDataMapper">
+
+    <select id="timeQuery" resultType="String">
+        SELECT DISTINCT DATE_FORMAT(Time, '%Y-%m-%d %H:%i') as Time
+        FROM `wavedata`
+        where Channel in
+        <foreach item="item" collection="channels" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+        ORDER BY Time desc
+    </select>
+    <select id="list" resultType="org.jeecg.modules.basic.entity.BasicData">
+        SELECT * FROM `wavedata`
+        where Channel in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+        and DATE_FORMAT(Time, '%Y-%m-%d %H:%i') = #{time}
+        ORDER BY Time desc
+    </select>
+    <select id="getMaxTime" resultType="String">
+        SELECT MAX(DATE_FORMAT(Time, '%Y-%m-%d %H:%i')) as Time
+        FROM `wavedata`
+        where Channel in
+        <foreach item="item" collection="channels" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+    </select>
+    <select id="batchSelect" resultType="org.jeecg.modules.basic.entity.BasicData">
+        SELECT `Index`,Time,DeviceId,Channel,Number,Distance,Wavelength FROM `wavedata`
+        where Channel =#{channelId}
+        and time &lt; #{time}
+        ORDER BY Time desc
+        limit #{count}
+    </select>
+</mapper>
+
+

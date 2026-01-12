@@ -1,0 +1,143 @@
+#Mybatis输出sql日志
+logging:
+  level:
+    org.jeecg.modules.system.mapper: info
+    org.jeecg.modules.basic.mapper: debug
+
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        enabled: true
+        loginUsername: admin
+        loginPassword: 123456
+        allow:
+      web-stat-filter:
+        enabled: true
+    dynamic:
+      druid: # 全局druid参数，绝大部分值和默认保持一致。(现已支持的参数如下,不清楚含义不要乱设置)
+        # 连接池的配置信息
+        # 初始化大小，最小，最大
+        initial-size: 5
+        min-idle: 5
+        maxActive: 1000
+        # 配置获取连接等待超时的时间
+        maxWait: 60000
+        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        timeBetweenEvictionRunsMillis: 60000
+        # 配置一个连接在池中最小生存的时间，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: SELECT 1
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        poolPreparedStatements: true
+        maxPoolPreparedStatementPerConnectionSize: 20
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat,slf4j
+        # 打开mergeSql功能；慢SQL记录
+        stat:
+          merge-sql: false
+          slow-sql-millis: 5000
+      datasource:
+        master:
+          #&compatibleMode=oracle
+          url: jdbc:mysql://localhost:3306/uwfbgs?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
+          username: root
+          password: 1qaz#EDC
+          driver-class-name: com.mysql.cj.jdbc.Driver
+  #redis 配置
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+
+jeecg:
+  # 平台上线安全配置
+  firewall:
+    # 数据源安全 (开启后，Online报表和图表的数据源为必填)
+    dataSourceSafe: true
+    # 低代码模式（dev:开发模式，prod:发布模式——关闭所有在线开发配置能力）
+    lowCodeMode: prod
+  # local\minio\alioss
+  uploadType: minio
+  # 前端访问地址
+  domainUrl:
+    pc: http://localhost:3100
+    app: http://localhost:8051
+  # 在线预览文件服务器地址配置
+  file-view-domain: http://fileview.jeecg.com
+  # minio文件上传
+  minio:
+    minio_url: http://10.9.136.78:9000
+    minio_name: hylb_gly
+    minio_pass: Hylb@2024...
+    bucketName: xjbaf
+  #大屏报表参数设置
+  jmreport:
+    #多租户模式，默认值为空(created:按照创建人隔离、tenant:按照租户隔离) (v1.6.2+ 新增)
+    saasMode: created
+    # 平台上线安全配置(v1.6.2+ 新增)
+    firewall:
+      # 数据源安全 (开启后，不允许使用平台数据源、SQL解析加签并且不允许查询数据库)
+      dataSourceSafe: true
+      # 低代码开发模式（dev:开发模式，prod:发布模式—关闭在线报表设计功能，分配角色admin、lowdeveloper可以放开限制）
+      lowCodeMode: prod
+
+  #分布式锁配置
+  redisson:
+    address: 10.9.136.78:6380
+    password: Hylb@2024...
+    type: STANDALONE
+    enabled: true
+
+#cas单点登录
+cas:
+  prefixUrl: http://cas.example.org:8443/cas
+
+#第三方登录
+justauth:
+  enabled: true
+  type:
+    GITHUB:
+      client-id: ??
+      client-secret: ??
+      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/github/callback
+    WECHAT_ENTERPRISE:
+      client-id: ??
+      client-secret: ??
+      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/wechat_enterprise/callback
+      agent-id: ??
+    DINGTALK:
+      client-id: ??
+      client-secret: ??
+      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/dingtalk/callback
+    WECHAT_OPEN:
+      client-id: ??
+      client-secret: ??
+      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/wechat_open/callback
+  cache:
+    type: default
+    prefix: 'demo::'
+    timeout: 1h
+
+#广拓WebSocket客户端配置
+gt:
+  websocket:
+    # WebSocket服务器地址
+    url: ws://10.9.138.94:80/api/sam/v3/alarmDevice/export
+    # 是否启用WebSocket连接
+    enabled: true
+    # 重连配置
+    reconnect:
+      # 最大重连次数
+      max-attempts: 10
+      # 初始重连延迟时间（秒）
+      initial-delay: 10
+    # 心跳配置
+    heartbeat:
+      # 心跳间隔时间（秒）
+      interval: 30
+
