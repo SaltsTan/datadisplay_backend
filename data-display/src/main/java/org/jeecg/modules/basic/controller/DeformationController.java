@@ -1,0 +1,67 @@
+package org.jeecg.modules.basic.controller;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.jeecg.common.api.vo.Result;
+import org.jeecg.modules.basic.dto.PointDTO;
+import org.jeecg.modules.basic.dto.SensorCalculationRequest;
+import org.jeecg.modules.basic.service.ISensorCalculationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 专门用于提供形变与应变计算数据的接口
+ */
+@RestController
+@RequestMapping("/deformation")
+@Api(tags="DeformationController")
+public class DeformationController {
+
+    @Autowired
+    private ISensorCalculationService sensorCalculationService;
+
+    /**
+     * 1. 获取指定单个排体的形变数据
+     * 返回结构: [ {x:0, y:0, strain:..., deformation:...}, ... ]
+     */
+    @PostMapping("/calculateSingle")
+    @ApiOperation(value="单个排体数据", notes="单个排体数据")
+    public Result<List<PointDTO>> calculateSingle(@RequestBody SensorCalculationRequest request) {
+        if (request.getTime1() == null || request.getTime2() == null || request.getRowBody() == null) {
+            return Result.error("参数不完整，必须传入 time1, time2, rowBody");
+        }
+
+        try {
+            List<PointDTO> data = sensorCalculationService.calculateSingleRowDeformation(
+                    request.getTime1(), request.getTime2(), request.getRowBody());
+            return Result.OK("计算成功", data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("计算异常: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 2. 获取全部(19~25号)排体的形变数据 (新增需求)
+     * 返回结构: { "19": [{x:0...}...], "20": [{x:0...}...] }
+     */
+    @PostMapping("/calculateAll")
+    @ApiOperation(value="排体数据", notes="排体数据")
+    public Result<Map<String, List<PointDTO>>> calculateAll(@RequestBody SensorCalculationRequest request) {
+        if (request.getTime1() == null || request.getTime2() == null) {
+            return Result.error("参数不完整，必须传入 time1, time2");
+        }
+
+        try {
+            Map<String, List<PointDTO>> mapData = sensorCalculationService.calculateAllRowsDeformation(
+                    request.getTime1(), request.getTime2());
+            return Result.OK("计算成功", mapData);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("全部排体计算异常: " + e.getMessage());
+        }
+    }
+}

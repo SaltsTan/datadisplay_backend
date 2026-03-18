@@ -72,26 +72,35 @@ public class BasicDefaultValueController extends JeecgController<BasicDefaultVal
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
 		QueryWrapper<BasicDefaultValue> queryWrapper = QueryGenerator.initQueryWrapper(basicDefaultValue, req.getParameterMap());
+        queryWrapper.and(qw->{
+            qw.and(qw1->{
+                qw1.ne("paiti_no","9");
+            });
+        });
 		Page<BasicDefaultValue> page = new Page<BasicDefaultValue>(pageNo, pageSize);
 		IPage<BasicDefaultValue> pageList = basicDefaultValueService.page(page, queryWrapper);
 		return Result.OK(pageList);
 	}
 
 	 @GetMapping(value = "/getDefaultTime")
-	 public Result<String> queryPageList(String  paitiNo) {
-		 LambdaQueryWrapper<BasicDefaultValue> wrapper = new LambdaQueryWrapper<>();
-		 wrapper.eq(BasicDefaultValue::getPaitiNo,paitiNo);
-		 List<BasicDefaultValue> pageList = basicDefaultValueService.list(wrapper);
-		 if(pageList.size()>0){
-			 BasicDefaultValue value = pageList.get(0);
-			 if(ObjectUtil.isNull(value)){
-				 return Result.OK("未找到对应数据");
-			 }
-			 String time = StringUtils.isEmpty(value.getTimeStr()) ? "2025-09-29 12:00" : value.getTimeStr();
+	 public Result<String> getDefaultTime() {
+		 BasicDefaultValue byId = basicDefaultValueService.getById("9");
+		 if(ObjectUtil.isNotNull(byId)){
+			 String time = StringUtils.isEmpty(byId.getTimeStr()) ? "2026-01-01 12:00" : byId.getTimeStr();
 			 return Result.OK(time);
 		 }
 		 return Result.OK(null);
 	 }
+
+     @GetMapping("/getFactor")
+     public Result<Double> getFactor(@RequestParam(name="paitiNo",required=true) String paitiNo) {
+		 BasicDefaultValue byId = basicDefaultValueService.getOne(new LambdaQueryWrapper<BasicDefaultValue>().eq(BasicDefaultValue::getPaitiNo, paitiNo));
+		 if(ObjectUtil.isNotNull(byId)){
+             Double factor = ObjectUtil.isEmpty(byId.getFactorValue()) ? 0.05 : byId.getFactorValue().doubleValue();
+			 return Result.OK(factor);
+		 }
+         return Result.OK(0.05);
+     }
 
 	/**
 	 *   添加
@@ -123,9 +132,17 @@ public class BasicDefaultValueController extends JeecgController<BasicDefaultVal
 
 	 @RequestMapping(value = "/updateDefaultTime", method = {RequestMethod.PUT,RequestMethod.POST})
 	 public Result<String> updateDefaultTime(@RequestBody BasicDefaultValue basicDefaultValue) {
-		basicDefaultValueService.update(basicDefaultValue,new LambdaQueryWrapper<BasicDefaultValue>().eq(BasicDefaultValue::getPaitiNo,basicDefaultValue.getPaitiNo()));
+         basicDefaultValue.setId("9");
+         basicDefaultValue.setPaitiNo(null);
+		basicDefaultValueService.updateById(basicDefaultValue);
 		 return Result.OK("编辑修改默认值成功!");
 	 }
+
+     @PostMapping(value = "/updateFactor")
+      public Result<String> updateFactor(@RequestBody BasicDefaultValue basicDefaultValue) {
+         basicDefaultValueService.update(basicDefaultValue,new LambdaQueryWrapper<BasicDefaultValue>().eq(BasicDefaultValue::getPaitiNo, basicDefaultValue.getPaitiNo()));
+         return Result.OK("编辑系数成功!");
+     }
 
 
 	 /**

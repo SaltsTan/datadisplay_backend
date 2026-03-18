@@ -44,4 +44,7 @@ public class BasicDefaultValue implements Serializable {
 	@Excel(name = "排体号", width = 15)
     @ApiModelProperty(value = "排体号")
     private String paitiNo;
+
+    @ApiModelProperty(value = "系数值")
+    private BigDecimal factorValue;
 }

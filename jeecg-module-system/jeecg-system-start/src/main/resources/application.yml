@@ -127,37 +127,6 @@ jeecg:
   shiro:
     excludeUrls: /test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**,/jmreport/bigscreen2/**
 
-wpark:
-  icc:
-    white-list-max-count:
-third:
-  service:
-    type: serviceICC
-  icc:
-    white-list-max-count: 100000
-    callback:
-      ip: 127.0.0.1
-      port: 9998
-  eh:
-    url: http://127.0.0.1:8099
-    username: admin
-    password: 111111
-  itc:
-    url: http://10.9.139.10:8001
-    username: jkzx
-    password: Xjbaf36000
-
-patrol:
-  startSyncTime: "2025-01-01 00:00:00"
-
-gt:
+push:
   api:
-    urlPrefix: http://10.9.138.94:80/api/sam/v3/export
-
-tempPass:
-  orgId: "1950466693445816321"
-  parkingLotIdList: "123456,123456"
-
-sms:
-  sComName: COM6
-  iBaudRate: 115200
+    url: http://127.0.0.1:8080/admin-api/ais/fiber-optic/data/upload

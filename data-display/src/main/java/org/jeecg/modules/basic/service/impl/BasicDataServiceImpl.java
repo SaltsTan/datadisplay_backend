@@ -5,11 +5,14 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.jeecg.modules.basic.dto.SensorCalculationRequest;
+import org.jeecg.modules.basic.dto.SensorCalculationResponse;
 import org.jeecg.modules.basic.entity.BasicData;
 import org.jeecg.modules.basic.entity.BasicSetting;
 import org.jeecg.modules.basic.mapper.BasicDataMapper;
 import org.jeecg.modules.basic.mapper.BasicSettingMapper;
 import org.jeecg.modules.basic.service.IBasicDataService;
+import org.jeecg.modules.basic.service.ISensorCalculationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +35,10 @@ public class BasicDataServiceImpl extends ServiceImpl<BasicDataMapper, BasicData
     @Autowired
     private BasicSettingMapper basicSettingMapper;
 
-    @Override
-    public IPage<String> timeQuery(Page<String> page, List<String> channels) {
-        return baseMapper.timeQuery(page,channels);
-    }
+//    @Override
+//    public IPage<String> timeQuery(Page<String> page, List<String> channels) {
+//        return baseMapper.timeQuery(page,channels);
+//    }
 
     @Override
     public List<BasicData> channelDataList(List<String> list, String time) {
@@ -75,4 +78,5 @@ public class BasicDataServiceImpl extends ServiceImpl<BasicDataMapper, BasicData
         });
         return resList;
     }
+
 }

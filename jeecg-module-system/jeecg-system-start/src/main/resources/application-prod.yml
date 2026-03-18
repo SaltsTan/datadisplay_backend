@@ -6,6 +6,15 @@ logging:
 
 spring:
   datasource:
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 30
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 900000
+      connection-timeout: 10000
+      connection-test-query: SELECT 1
     druid:
       stat-view-servlet:
         enabled: true

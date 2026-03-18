@@ -2,10 +2,14 @@ package org.jeecg.modules.basic.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.jeecg.modules.basic.dto.SensorCalculationRequest;
+import org.jeecg.modules.basic.dto.SensorCalculationResponse;
+import org.jeecg.modules.basic.dto.SensorDataPoint;
 import org.jeecg.modules.basic.entity.BasicData;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Description: basic_data
@@ -15,7 +19,7 @@ import java.util.List;
  */
 public interface IBasicDataService extends IService<BasicData> {
 
-    IPage<String> timeQuery(Page<String> page, List<String> channels);
+//    IPage<String> timeQuery(Page<String> page, List<String> channels);
 
     List<BasicData> channelDataList(List<String> list, String time);
 }

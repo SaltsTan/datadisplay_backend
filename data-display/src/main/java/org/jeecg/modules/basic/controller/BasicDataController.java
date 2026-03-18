@@ -1,13 +1,16 @@
 package org.jeecg.modules.basic.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
+import org.jeecg.modules.basic.dto.*;
 import org.jeecg.modules.basic.entity.BasicData;
 import org.jeecg.modules.basic.service.IBasicDataService;
 
@@ -79,20 +82,21 @@ public class BasicDataController extends JeecgController<BasicData, IBasicDataSe
 		 return Result.OK(pageList);
 	 }
 
-	 @ApiOperation(value="查询时间点列表")
-	 @GetMapping(value = "/timeQuery")
-	 public Result<IPage<String>> timeQuery(@RequestParam(name="channels", required=true) String channels,
-												   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-												   @RequestParam(name="pageSize", defaultValue="20") Integer pageSize,
-												   HttpServletRequest req) {
-		 if(StringUtils.isEmpty( channels)){
-			 return Result.error("请选择排体！");
-		 }
-		 Page<String> page = new Page<>(pageNo, pageSize);
-		 List<String> list = Arrays.asList(channels.split(","));
-		 IPage<String> pageList = basicDataService.timeQuery(page, list);
-		 return Result.OK(pageList);
-	 }
+//	 @ApiOperation(value="查询时间点列表")
+//	 @GetMapping(value = "/timeQuery")
+//	 public Result<IPage<String>> timeQuery(@RequestParam(name="channels", required=true) String channels,
+//												   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+//												   @RequestParam(name="pageSize", defaultValue="20") Integer pageSize,
+//												   HttpServletRequest req) {
+//		 if(StringUtils.isEmpty( channels)){
+//			 return Result.error("请选择排体！");
+//		 }
+//		 Page<String> page = new Page<>(pageNo, pageSize);
+//		 List<String> list = Arrays.asList(channels.split(","));
+//		 IPage<String> pageList = basicDataService.timeQuery(page, list);
+//		 return Result.OK(pageList);
+//	 }
+
 
 	/**
 	 *   添加
