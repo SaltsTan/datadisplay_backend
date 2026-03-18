@@ -1,0 +1,18 @@
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - mvn -B clean package -Dmaven.test.skip=true -Dautoconfig.skip
+    - cp -f ./jeecg-module-system/jeecg-system-start/target/jeecg-system-start-3.6.0.jar /data/smartAf/
+
+deploy:
+  stage: deploy
+  script:
+    
+    - docker restart smart-af
+  only:
+    - dev

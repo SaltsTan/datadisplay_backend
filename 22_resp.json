@@ -1,0 +1,3211 @@
+{
+    "success": true,
+    "message": "",
+    "code": 200,
+    "result": {
+        "dataPoints": [
+            {
+                "x": 0,
+                "y": 10,
+                "strain": 3.6818181819028477,
+                "deformation": 0,
+                "channel": "CH9",
+                "pointIndex": 0
+            },
+            {
+                "x": 1,
+                "y": 10,
+                "strain": 3.908333333422585,
+                "deformation": 0.0873428244963077,
+                "channel": "CH9",
+                "pointIndex": 1
+            },
+            {
+                "x": 2,
+                "y": 10,
+                "strain": 4.176923077016209,
+                "deformation": 0.48356954106883143,
+                "channel": "CH9",
+                "pointIndex": 2
+            },
+            {
+                "x": 3,
+                "y": 10,
+                "strain": 4.407142857239315,
+                "deformation": 1.4508105205869366,
+                "channel": "CH9",
+                "pointIndex": 3
+            },
+            {
+                "x": 4,
+                "y": 10,
+                "strain": 4.460000000086923,
+                "deformation": 3.186819022762505,
+                "channel": "CH9",
+                "pointIndex": 4
+            },
+            {
+                "x": 5,
+                "y": 10,
+                "strain": 4.28750000007858,
+                "deformation": 5.730321836248957,
+                "channel": "CH9",
+                "pointIndex": 5
+            },
+            {
+                "x": 6,
+                "y": 10,
+                "strain": 4.023529411827707,
+                "deformation": 8.940655928799135,
+                "channel": "CH9",
+                "pointIndex": 6
+            },
+            {
+                "x": 7,
+                "y": 10,
+                "strain": 3.788888888938042,
+                "deformation": 12.584019568717554,
+                "channel": "CH9",
+                "pointIndex": 7
+            },
+            {
+                "x": 8,
+                "y": 10,
+                "strain": 3.5789473684578152,
+                "deformation": 16.427634524658977,
+                "channel": "CH9",
+                "pointIndex": 8
+            },
+            {
+                "x": 9,
+                "y": 10,
+                "strain": 3.390000000037253,
+                "deformation": 20.269347867989907,
+                "channel": "CH9",
+                "pointIndex": 9
+            },
+            {
+                "x": 10,
+                "y": 10,
+                "strain": 3.2380952381284995,
+                "deformation": 23.93945301817891,
+                "channel": "CH9",
+                "pointIndex": 10
+            },
+            {
+                "x": 11,
+                "y": 10,
+                "strain": 3.023809523831698,
+                "deformation": 27.28221408868634,
+                "channel": "CH9",
+                "pointIndex": 11
+            },
+            {
+                "x": 12,
+                "y": 10,
+                "strain": 3.0238095238095237,
+                "deformation": 30.17954769470782,
+                "channel": "CH9",
+                "pointIndex": 12
+            },
+            {
+                "x": 13,
+                "y": 10,
+                "strain": 2.999999999988913,
+                "deformation": 32.60462991262479,
+                "channel": "CH9",
+                "pointIndex": 13
+            },
+            {
+                "x": 14,
+                "y": 10,
+                "strain": 3.061904761884805,
+                "deformation": 34.59877887034125,
+                "channel": "CH9",
+                "pointIndex": 14
+            },
+            {
+                "x": 15,
+                "y": 10,
+                "strain": 3.1047619047264257,
+                "deformation": 36.24086832882792,
+                "channel": "CH9",
+                "pointIndex": 15
+            },
+            {
+                "x": 16,
+                "y": 10,
+                "strain": 3.1476190475680466,
+                "deformation": 37.63028384015353,
+                "channel": "CH9",
+                "pointIndex": 16
+            },
+            {
+                "x": 17,
+                "y": 10,
+                "strain": 3.371428571375353,
+                "deformation": 38.92091692574413,
+                "channel": "CH9",
+                "pointIndex": 17
+            },
+            {
+                "x": 18,
+                "y": 10,
+                "strain": 3.5952380951826592,
+                "deformation": 40.37420520711544,
+                "channel": "CH9",
+                "pointIndex": 18
+            },
+            {
+                "x": 19,
+                "y": 10,
+                "strain": 3.666666666622318,
+                "deformation": 42.27569237445231,
+                "channel": "CH9",
+                "pointIndex": 19
+            },
+            {
+                "x": 20,
+                "y": 10,
+                "strain": 3.6190476190143577,
+                "deformation": 44.81749647101236,
+                "channel": "CH9",
+                "pointIndex": 20
+            },
+            {
+                "x": 21,
+                "y": 10,
+                "strain": 3.614285714248018,
+                "deformation": 48.10891377176687,
+                "channel": "CH9",
+                "pointIndex": 21
+            },
+            {
+                "x": 22,
+                "y": 10,
+                "strain": 3.5428571428194466,
+                "deformation": 52.22998618057671,
+                "channel": "CH9",
+                "pointIndex": 22
+            },
+            {
+                "x": 23,
+                "y": 10,
+                "strain": 3.404761904717556,
+                "deformation": 57.21450494243301,
+                "channel": "CH9",
+                "pointIndex": 23
+            },
+            {
+                "x": 24,
+                "y": 10,
+                "strain": 3.17619047614391,
+                "deformation": 63.019492079497404,
+                "channel": "CH9",
+                "pointIndex": 24
+            },
+            {
+                "x": 25,
+                "y": 10,
+                "strain": 3.0523809523410383,
+                "deformation": 69.56360060872005,
+                "channel": "CH9",
+                "pointIndex": 25
+            },
+            {
+                "x": 26,
+                "y": 10,
+                "strain": 2.8047619047242085,
+                "deformation": 76.76143801656255,
+                "channel": "CH9",
+                "pointIndex": 26
+            },
+            {
+                "x": 27,
+                "y": 10,
+                "strain": 2.604761904737513,
+                "deformation": 84.50144132300049,
+                "channel": "CH9",
+                "pointIndex": 27
+            },
+            {
+                "x": 28,
+                "y": 10,
+                "strain": 2.4047619047508175,
+                "deformation": 92.66275799348224,
+                "channel": "CH9",
+                "pointIndex": 28
+            },
+            {
+                "x": 29,
+                "y": 10,
+                "strain": 2.1571428571450744,
+                "deformation": 101.1223849558243,
+                "channel": "CH9",
+                "pointIndex": 29
+            },
+            {
+                "x": 30,
+                "y": 10,
+                "strain": 1.8999999999955652,
+                "deformation": 109.72809486748473,
+                "channel": "CH9",
+                "pointIndex": 30
+            },
+            {
+                "x": 31,
+                "y": 10,
+                "strain": 1.6238095238028716,
+                "deformation": 118.30146990972203,
+                "channel": "CH9",
+                "pointIndex": 31
+            },
+            {
+                "x": 32,
+                "y": 10,
+                "strain": 1.3761904761860413,
+                "deformation": 126.6529555510431,
+                "channel": "CH9",
+                "pointIndex": 32
+            },
+            {
+                "x": 33,
+                "y": 10,
+                "strain": 1.0238095238095237,
+                "deformation": 134.56953335826896,
+                "channel": "CH9",
+                "pointIndex": 33
+            },
+            {
+                "x": 34,
+                "y": 10,
+                "strain": 0.8666666666755364,
+                "deformation": 141.83595755567416,
+                "channel": "CH9",
+                "pointIndex": 34
+            },
+            {
+                "x": 35,
+                "y": 10,
+                "strain": 0.7619047619158491,
+                "deformation": 148.3164370526344,
+                "channel": "CH9",
+                "pointIndex": 35
+            },
+            {
+                "x": 36,
+                "y": 10,
+                "strain": 0.7857142857253729,
+                "deformation": 153.97475833148758,
+                "channel": "CH9",
+                "pointIndex": 36
+            },
+            {
+                "x": 37,
+                "y": 10,
+                "strain": 0.8142857143123235,
+                "deformation": 158.84006885767567,
+                "channel": "CH9",
+                "pointIndex": 37
+            },
+            {
+                "x": 38,
+                "y": 10,
+                "strain": 0.6619047619335886,
+                "deformation": 162.91544082782693,
+                "channel": "CH9",
+                "pointIndex": 38
+            },
+            {
+                "x": 39,
+                "y": 10,
+                "strain": 0.5095238095548537,
+                "deformation": 166.10095104686144,
+                "channel": "CH9",
+                "pointIndex": 39
+            },
+            {
+                "x": 40,
+                "y": 10,
+                "strain": 0.4523809524142139,
+                "deformation": 168.26349659619365,
+                "channel": "CH9",
+                "pointIndex": 40
+            },
+            {
+                "x": 41,
+                "y": 10,
+                "strain": 0.3333333333555077,
+                "deformation": 169.29539698427016,
+                "channel": "CH9",
+                "pointIndex": 41
+            },
+            {
+                "x": 42,
+                "y": 10,
+                "strain": 0.21428571430788862,
+                "deformation": 169.08213608205298,
+                "channel": "CH9",
+                "pointIndex": 42
+            },
+            {
+                "x": 43,
+                "y": 10,
+                "strain": 0.25714285714950946,
+                "deformation": 167.53849883577143,
+                "channel": "CH9",
+                "pointIndex": 43
+            },
+            {
+                "x": 44,
+                "y": 10,
+                "strain": 0.31904761904540163,
+                "deformation": 164.67093685831844,
+                "channel": "CH9",
+                "pointIndex": 44
+            },
+            {
+                "x": 45,
+                "y": 10,
+                "strain": 0.542857142852708,
+                "deformation": 160.58282956596813,
+                "channel": "CH9",
+                "pointIndex": 45
+            },
+            {
+                "x": 46,
+                "y": 10,
+                "strain": 0.7666666666600144,
+                "deformation": 155.46922304166682,
+                "channel": "CH9",
+                "pointIndex": 46
+            },
+            {
+                "x": 47,
+                "y": 10,
+                "strain": 1.0761904761727368,
+                "deformation": 149.59255968172445,
+                "channel": "CH9",
+                "pointIndex": 47
+            },
+            {
+                "x": 48,
+                "y": 10,
+                "strain": 1.428571428538167,
+                "deformation": 143.27388403298292,
+                "channel": "CH9",
+                "pointIndex": 48
+            },
+            {
+                "x": 49,
+                "y": 10,
+                "strain": 1.8476190475880034,
+                "deformation": 136.89921760080932,
+                "channel": "CH9",
+                "pointIndex": 49
+            },
+            {
+                "x": 50,
+                "y": 10,
+                "strain": 2.0285714285315146,
+                "deformation": 130.84713181377083,
+                "channel": "CH9",
+                "pointIndex": 50
+            },
+            {
+                "x": 51,
+                "y": 10,
+                "strain": 2.504761904733078,
+                "deformation": 125.48026108046932,
+                "channel": "CH9",
+                "pointIndex": 51
+            },
+            {
+                "x": 52,
+                "y": 10,
+                "strain": 2.9809523809346414,
+                "deformation": 121.26669295851578,
+                "channel": "CH9",
+                "pointIndex": 52
+            },
+            {
+                "x": 53,
+                "y": 10,
+                "strain": 3.3285714285669936,
+                "deformation": 118.73515248632583,
+                "channel": "CH9",
+                "pointIndex": 53
+            },
+            {
+                "x": 54,
+                "y": 10,
+                "strain": 3.571428571417484,
+                "deformation": 118.33944150722682,
+                "channel": "CH9",
+                "pointIndex": 54
+            },
+            {
+                "x": 55,
+                "y": 10,
+                "strain": 3.619047619025445,
+                "deformation": 120.41158767098722,
+                "channel": "CH9",
+                "pointIndex": 55
+            },
+            {
+                "x": 56,
+                "y": 10,
+                "strain": 3.3952380952181382,
+                "deformation": 125.10147577022892,
+                "channel": "CH9",
+                "pointIndex": 56
+            },
+            {
+                "x": 57,
+                "y": 10,
+                "strain": 3.0333333333200287,
+                "deformation": 132.34885234873263,
+                "channel": "CH9",
+                "pointIndex": 57
+            },
+            {
+                "x": 58,
+                "y": 10,
+                "strain": 2.628571428558124,
+                "deformation": 141.9562135662584,
+                "channel": "CH9",
+                "pointIndex": 58
+            },
+            {
+                "x": 59,
+                "y": 10,
+                "strain": 2.21428571426354,
+                "deformation": 153.68051026766167,
+                "channel": "CH9",
+                "pointIndex": 59
+            },
+            {
+                "x": 60,
+                "y": 10,
+                "strain": 1.799999999968956,
+                "deformation": 167.27873170024915,
+                "channel": "CH9",
+                "pointIndex": 60
+            },
+            {
+                "x": 61,
+                "y": 10,
+                "strain": 1.352380952343256,
+                "deformation": 182.51343546770005,
+                "channel": "CH9",
+                "pointIndex": 61
+            },
+            {
+                "x": 62,
+                "y": 10,
+                "strain": 0.9428571428260988,
+                "deformation": 199.15451404312932,
+                "channel": "CH9",
+                "pointIndex": 62
+            },
+            {
+                "x": 63,
+                "y": 10,
+                "strain": 0.528571428542602,
+                "deformation": 216.9939029104108,
+                "channel": "CH9",
+                "pointIndex": 63
+            },
+            {
+                "x": 64,
+                "y": 10,
+                "strain": -0.033333333353290244,
+                "deformation": 235.80448993437335,
+                "channel": "CH9",
+                "pointIndex": 64
+            },
+            {
+                "x": 65,
+                "y": 10,
+                "strain": -0.600000000015522,
+                "deformation": 255.29157465419382,
+                "channel": "CH9",
+                "pointIndex": 65
+            },
+            {
+                "x": 66,
+                "y": 10,
+                "strain": -1.242857142883752,
+                "deformation": 275.1085748886144,
+                "channel": "CH9",
+                "pointIndex": 66
+            },
+            {
+                "x": 67,
+                "y": 10,
+                "strain": -1.8857142857519822,
+                "deformation": 294.8752295009151,
+                "channel": "CH9",
+                "pointIndex": 67
+            },
+            {
+                "x": 68,
+                "y": 10,
+                "strain": -2.338095238121847,
+                "deformation": 314.2472604572963,
+                "channel": "CH9",
+                "pointIndex": 68
+            },
+            {
+                "x": 69,
+                "y": 10,
+                "strain": -2.7904761904917126,
+                "deformation": 332.9836923353366,
+                "channel": "CH9",
+                "pointIndex": 69
+            },
+            {
+                "x": 70,
+                "y": 10,
+                "strain": -3.295238095269139,
+                "deformation": 350.8836802809701,
+                "channel": "CH9",
+                "pointIndex": 70
+            },
+            {
+                "x": 71,
+                "y": 10,
+                "strain": -3.528571428598038,
+                "deformation": 367.7893517903528,
+                "channel": "CH9",
+                "pointIndex": 71
+            },
+            {
+                "x": 72,
+                "y": 10,
+                "strain": -4.047619047652309,
+                "deformation": 383.5902613949709,
+                "channel": "CH9",
+                "pointIndex": 72
+            },
+            {
+                "x": 73,
+                "y": 10,
+                "strain": -4.476190476234825,
+                "deformation": 398.1140588644041,
+                "channel": "CH9",
+                "pointIndex": 73
+            },
+            {
+                "x": 74,
+                "y": 10,
+                "strain": -5.0000000000443485,
+                "deformation": 411.12168889910487,
+                "channel": "CH9",
+                "pointIndex": 74
+            },
+            {
+                "x": 75,
+                "y": 10,
+                "strain": -5.4190476190720105,
+                "deformation": 422.35416532395897,
+                "channel": "CH9",
+                "pointIndex": 75
+            },
+            {
+                "x": 76,
+                "y": 10,
+                "strain": -5.6857142857320255,
+                "deformation": 431.59739443697936,
+                "channel": "CH9",
+                "pointIndex": 76
+            },
+            {
+                "x": 77,
+                "y": 10,
+                "strain": -5.79523809526914,
+                "deformation": 438.75659897242383,
+                "channel": "CH9",
+                "pointIndex": 77
+            },
+            {
+                "x": 78,
+                "y": 10,
+                "strain": -5.880952380985643,
+                "deformation": 443.836579237504,
+                "channel": "CH9",
+                "pointIndex": 78
+            },
+            {
+                "x": 79,
+                "y": 10,
+                "strain": -5.733333333373247,
+                "deformation": 446.9302307775261,
+                "channel": "CH9",
+                "pointIndex": 79
+            },
+            {
+                "x": 80,
+                "y": 10,
+                "strain": -5.576190476228173,
+                "deformation": 448.23363654179326,
+                "channel": "CH9",
+                "pointIndex": 80
+            },
+            {
+                "x": 81,
+                "y": 10,
+                "strain": -5.466666666702146,
+                "deformation": 447.9668810157105,
+                "channel": "CH9",
+                "pointIndex": 81
+            },
+            {
+                "x": 82,
+                "y": 10,
+                "strain": -5.280952380981208,
+                "deformation": 446.31759860788134,
+                "channel": "CH9",
+                "pointIndex": 82
+            },
+            {
+                "x": 83,
+                "y": 10,
+                "strain": -5.071428571450745,
+                "deformation": 443.4765343259894,
+                "channel": "CH9",
+                "pointIndex": 83
+            },
+            {
+                "x": 84,
+                "y": 10,
+                "strain": -4.900000000017739,
+                "deformation": 439.62778955252634,
+                "channel": "CH9",
+                "pointIndex": 84
+            },
+            {
+                "x": 85,
+                "y": 10,
+                "strain": -4.733333333351073,
+                "deformation": 434.91537350408294,
+                "channel": "CH9",
+                "pointIndex": 85
+            },
+            {
+                "x": 86,
+                "y": 10,
+                "strain": -4.519047619054271,
+                "deformation": 429.46048433734234,
+                "channel": "CH9",
+                "pointIndex": 86
+            },
+            {
+                "x": 87,
+                "y": 10,
+                "strain": -4.533333333331116,
+                "deformation": 423.3289054624474,
+                "channel": "CH9",
+                "pointIndex": 87
+            },
+            {
+                "x": 88,
+                "y": 10,
+                "strain": -4.299999999980043,
+                "deformation": 416.5252835767953,
+                "channel": "CH9",
+                "pointIndex": 88
+            },
+            {
+                "x": 89,
+                "y": 10,
+                "strain": -4.033333333308941,
+                "deformation": 409.1071839645734,
+                "channel": "CH9",
+                "pointIndex": 89
+            },
+            {
+                "x": 90,
+                "y": 10,
+                "strain": -3.76666666663784,
+                "deformation": 401.1878938761704,
+                "channel": "CH9",
+                "pointIndex": 90
+            },
+            {
+                "x": 91,
+                "y": 10,
+                "strain": -3.514285714243583,
+                "deformation": 392.86265140682804,
+                "channel": "CH9",
+                "pointIndex": 91
+            },
+            {
+                "x": 92,
+                "y": 10,
+                "strain": -3.2047619047197733,
+                "deformation": 384.21417545056073,
+                "channel": "CH9",
+                "pointIndex": 92
+            },
+            {
+                "x": 93,
+                "y": 10,
+                "strain": -2.938095238048672,
+                "deformation": 375.3244552546825,
+                "channel": "CH9",
+                "pointIndex": 93
+            },
+            {
+                "x": 94,
+                "y": 10,
+                "strain": -2.8047619047131214,
+                "deformation": 366.22390556573754,
+                "channel": "CH9",
+                "pointIndex": 94
+            },
+            {
+                "x": 95,
+                "y": 10,
+                "strain": -2.4333333332934197,
+                "deformation": 356.92139735146554,
+                "channel": "CH9",
+                "pointIndex": 95
+            },
+            {
+                "x": 96,
+                "y": 10,
+                "strain": -2.0428571428194466,
+                "deformation": 347.51969558881837,
+                "channel": "CH9",
+                "pointIndex": 96
+            },
+            {
+                "x": 97,
+                "y": 10,
+                "strain": -1.8047619047131211,
+                "deformation": 338.1584316141991,
+                "channel": "CH9",
+                "pointIndex": 97
+            },
+            {
+                "x": 98,
+                "y": 10,
+                "strain": -1.5666666666067959,
+                "deformation": 328.91321986693805,
+                "channel": "CH9",
+                "pointIndex": 98
+            },
+            {
+                "x": 99,
+                "y": 10,
+                "strain": -1.1809523808880753,
+                "deformation": 319.86766249758085,
+                "channel": "CH9",
+                "pointIndex": 99
+            },
+            {
+                "x": 100,
+                "y": 10,
+                "strain": -0.9904761904118848,
+                "deformation": 311.1386181850867,
+                "channel": "CH9",
+                "pointIndex": 100
+            },
+            {
+                "x": 101,
+                "y": 10,
+                "strain": -0.7904761904030151,
+                "deformation": 302.7912943027297,
+                "channel": "CH9",
+                "pointIndex": 101
+            },
+            {
+                "x": 102,
+                "y": 10,
+                "strain": -0.48571428564554525,
+                "deformation": 294.8816816339222,
+                "channel": "CH9",
+                "pointIndex": 102
+            },
+            {
+                "x": 103,
+                "y": 10,
+                "strain": -0.22380952375187052,
+                "deformation": 287.5193039881845,
+                "channel": "CH9",
+                "pointIndex": 103
+            },
+            {
+                "x": 104,
+                "y": 10,
+                "strain": -0.014285714232495852,
+                "deformation": 280.81533648071604,
+                "channel": "CH9",
+                "pointIndex": 104
+            },
+            {
+                "x": 105,
+                "y": 10,
+                "strain": 0.23809523815067396,
+                "deformation": 274.86831789799504,
+                "channel": "CH9",
+                "pointIndex": 105
+            },
+            {
+                "x": 106,
+                "y": 10,
+                "strain": 0.4571428571916407,
+                "deformation": 269.79110315957746,
+                "channel": "CH9",
+                "pointIndex": 106
+            },
+            {
+                "x": 107,
+                "y": 10,
+                "strain": 0.5761904762392598,
+                "deformation": 265.6789355147136,
+                "channel": "CH9",
+                "pointIndex": 107
+            },
+            {
+                "x": 108,
+                "y": 10,
+                "strain": 0.9190476190941852,
+                "deformation": 262.63953908870633,
+                "channel": "CH9",
+                "pointIndex": 108
+            },
+            {
+                "x": 109,
+                "y": 10,
+                "strain": 0.919047619083098,
+                "deformation": 260.79911014634934,
+                "channel": "CH9",
+                "pointIndex": 109
+            },
+            {
+                "x": 110,
+                "y": 10,
+                "strain": 0.9000000000288266,
+                "deformation": 260.1805833695736,
+                "channel": "CH9",
+                "pointIndex": 110
+            },
+            {
+                "x": 111,
+                "y": 10,
+                "strain": 0.8809523809745553,
+                "deformation": 260.7280894227352,
+                "channel": "CH9",
+                "pointIndex": 111
+            },
+            {
+                "x": 112,
+                "y": 10,
+                "strain": 0.7761904762037808,
+                "deformation": 262.3792048153402,
+                "channel": "CH9",
+                "pointIndex": 112
+            },
+            {
+                "x": 113,
+                "y": 10,
+                "strain": 0.6476190476345697,
+                "deformation": 265.04311290434975,
+                "channel": "CH9",
+                "pointIndex": 113
+            },
+            {
+                "x": 114,
+                "y": 10,
+                "strain": 0.5619047619180665,
+                "deformation": 268.6238288949886,
+                "channel": "CH9",
+                "pointIndex": 114
+            },
+            {
+                "x": 115,
+                "y": 10,
+                "strain": 0.6142857143034538,
+                "deformation": 273.0720012420064,
+                "channel": "CH9",
+                "pointIndex": 115
+            },
+            {
+                "x": 116,
+                "y": 10,
+                "strain": 0.48571428573424263,
+                "deformation": 278.34705629342125,
+                "channel": "CH9",
+                "pointIndex": 116
+            },
+            {
+                "x": 117,
+                "y": 10,
+                "strain": 0.33809523811076014,
+                "deformation": 284.33580231902476,
+                "channel": "CH9",
+                "pointIndex": 117
+            },
+            {
+                "x": 118,
+                "y": 10,
+                "strain": 0.16666666667775384,
+                "deformation": 290.87058118351325,
+                "channel": "CH9",
+                "pointIndex": 118
+            },
+            {
+                "x": 119,
+                "y": 10,
+                "strain": -0.16190476190032704,
+                "deformation": 297.7363434445282,
+                "channel": "CH9",
+                "pointIndex": 119
+            },
+            {
+                "x": 120,
+                "y": 10,
+                "strain": -0.2949999999953434,
+                "deformation": 304.6915608412074,
+                "channel": "CH9",
+                "pointIndex": 120
+            },
+            {
+                "x": 121,
+                "y": 10,
+                "strain": -0.44210526315299303,
+                "deformation": 311.5589178376893,
+                "channel": "CH9",
+                "pointIndex": 121
+            },
+            {
+                "x": 122,
+                "y": 10,
+                "strain": -0.6166666666718407,
+                "deformation": 318.20652984952153,
+                "channel": "CH9",
+                "pointIndex": 122
+            },
+            {
+                "x": 123,
+                "y": 10,
+                "strain": -0.8823529411764706,
+                "deformation": 324.4728826538663,
+                "channel": "CH9",
+                "pointIndex": 123
+            },
+            {
+                "x": 124,
+                "y": 10,
+                "strain": -1.1812499999941792,
+                "deformation": 330.1475567828784,
+                "channel": "CH9",
+                "pointIndex": 124
+            },
+            {
+                "x": 125,
+                "y": 10,
+                "strain": -1.4466666666635624,
+                "deformation": 335.00255353558657,
+                "channel": "CH9",
+                "pointIndex": 125
+            },
+            {
+                "x": 126,
+                "y": 10,
+                "strain": -1.75,
+                "deformation": 338.8181246718382,
+                "channel": "CH9",
+                "pointIndex": 126
+            },
+            {
+                "x": 127,
+                "y": 10,
+                "strain": -2.0461538461431,
+                "deformation": 341.3716740601645,
+                "channel": "CH9",
+                "pointIndex": 127
+            },
+            {
+                "x": 128,
+                "y": 10,
+                "strain": -2.2916666666666665,
+                "deformation": 342.45280524718606,
+                "channel": "CH9",
+                "pointIndex": 128
+            },
+            {
+                "x": 129,
+                "y": 10,
+                "strain": -2.5636363636321304,
+                "deformation": 341.8751104692718,
+                "channel": "CH9",
+                "pointIndex": 129
+            },
+            {
+                "x": 0,
+                "y": 14,
+                "strain": 8.145454545611177,
+                "deformation": 0,
+                "channel": "CH10",
+                "pointIndex": 0
+            },
+            {
+                "x": 0,
+                "y": 29,
+                "strain": 7.891666666818007,
+                "deformation": 0,
+                "channel": "CH10_S1",
+                "pointIndex": 0
+            },
+            {
+                "x": 1,
+                "y": 14,
+                "strain": 8.307692307817678,
+                "deformation": 0,
+                "channel": "CH10_S2",
+                "pointIndex": 1
+            },
+            {
+                "x": 1,
+                "y": 29,
+                "strain": 8.078571428694497,
+                "deformation": 0,
+                "channel": "CH10_S3",
+                "pointIndex": 1
+            },
+            {
+                "x": 2,
+                "y": 14,
+                "strain": 8.426666666769112,
+                "deformation": 0,
+                "channel": "CH10_S4",
+                "pointIndex": 2
+            },
+            {
+                "x": 2,
+                "y": 29,
+                "strain": 8.218750000101863,
+                "deformation": 0,
+                "channel": "CH10_S5",
+                "pointIndex": 2
+            },
+            {
+                "x": 3,
+                "y": 14,
+                "strain": 8.22941176480997,
+                "deformation": 0,
+                "channel": "CH10_S6",
+                "pointIndex": 3
+            },
+            {
+                "x": 3,
+                "y": 29,
+                "strain": 7.9888888889820215,
+                "deformation": 0,
+                "channel": "CH10_S7",
+                "pointIndex": 3
+            },
+            {
+                "x": 4,
+                "y": 14,
+                "strain": 7.936842105339134,
+                "deformation": 0,
+                "channel": "CH10_S8",
+                "pointIndex": 4
+            },
+            {
+                "x": 4,
+                "y": 29,
+                "strain": 7.710000000079162,
+                "deformation": 0,
+                "channel": "CH10_S9",
+                "pointIndex": 4
+            },
+            {
+                "x": 5,
+                "y": 14,
+                "strain": 7.642857142923666,
+                "deformation": 0,
+                "channel": "CH10_S10",
+                "pointIndex": 5
+            },
+            {
+                "x": 5,
+                "y": 29,
+                "strain": 7.309523809590333,
+                "deformation": 0,
+                "channel": "CH10_S11",
+                "pointIndex": 5
+            },
+            {
+                "x": 6,
+                "y": 14,
+                "strain": 7.066666666717667,
+                "deformation": 0,
+                "channel": "CH10_S12",
+                "pointIndex": 6
+            },
+            {
+                "x": 6,
+                "y": 29,
+                "strain": 6.823809523845003,
+                "deformation": 0,
+                "channel": "CH10_S13",
+                "pointIndex": 6
+            },
+            {
+                "x": 7,
+                "y": 14,
+                "strain": 6.7238095238405675,
+                "deformation": 0,
+                "channel": "CH10_S14",
+                "pointIndex": 7
+            },
+            {
+                "x": 7,
+                "y": 29,
+                "strain": 6.738095238106325,
+                "deformation": 0,
+                "channel": "CH10_S15",
+                "pointIndex": 7
+            },
+            {
+                "x": 8,
+                "y": 14,
+                "strain": 6.890476190473973,
+                "deformation": 0,
+                "channel": "CH10_S16",
+                "pointIndex": 8
+            },
+            {
+                "x": 8,
+                "y": 29,
+                "strain": 6.904761904739731,
+                "deformation": 0,
+                "channel": "CH10_S17",
+                "pointIndex": 8
+            },
+            {
+                "x": 9,
+                "y": 14,
+                "strain": 7.252380952349908,
+                "deformation": 0,
+                "channel": "CH10_S18",
+                "pointIndex": 9
+            },
+            {
+                "x": 9,
+                "y": 29,
+                "strain": 7.028571428531515,
+                "deformation": 0,
+                "channel": "CH10_S19",
+                "pointIndex": 9
+            },
+            {
+                "x": 10,
+                "y": 14,
+                "strain": 7.947619047559177,
+                "deformation": 0,
+                "channel": "CH10_S20",
+                "pointIndex": 10
+            },
+            {
+                "x": 10,
+                "y": 29,
+                "strain": 7.3190476190010525,
+                "deformation": 0,
+                "channel": "CH10_S21",
+                "pointIndex": 10
+            },
+            {
+                "x": 11,
+                "y": 14,
+                "strain": 8.185714285665503,
+                "deformation": 0,
+                "channel": "CH10_S22",
+                "pointIndex": 11
+            },
+            {
+                "x": 11,
+                "y": 29,
+                "strain": 7.557142857107378,
+                "deformation": 0,
+                "channel": "CH10_S23",
+                "pointIndex": 11
+            },
+            {
+                "x": 12,
+                "y": 14,
+                "strain": 8.499999999966738,
+                "deformation": 0,
+                "channel": "CH10_S24",
+                "pointIndex": 12
+            },
+            {
+                "x": 12,
+                "y": 29,
+                "strain": 7.952380952358778,
+                "deformation": 0,
+                "channel": "CH10_S25",
+                "pointIndex": 12
+            },
+            {
+                "x": 13,
+                "y": 14,
+                "strain": 8.89999999997339,
+                "deformation": 0,
+                "channel": "CH10_S26",
+                "pointIndex": 13
+            },
+            {
+                "x": 13,
+                "y": 29,
+                "strain": 8.585714285683242,
+                "deformation": 0,
+                "channel": "CH10_S27",
+                "pointIndex": 13
+            },
+            {
+                "x": 14,
+                "y": 14,
+                "strain": 9.590476190449582,
+                "deformation": 0,
+                "channel": "CH10_S28",
+                "pointIndex": 14
+            },
+            {
+                "x": 14,
+                "y": 29,
+                "strain": 9.342857142843839,
+                "deformation": 0,
+                "channel": "CH10_S29",
+                "pointIndex": 14
+            },
+            {
+                "x": 15,
+                "y": 14,
+                "strain": 10.371428571408615,
+                "deformation": 0,
+                "channel": "CH10_S30",
+                "pointIndex": 15
+            },
+            {
+                "x": 15,
+                "y": 29,
+                "strain": 10.066666666651145,
+                "deformation": 0,
+                "channel": "CH10_S31",
+                "pointIndex": 15
+            },
+            {
+                "x": 16,
+                "y": 14,
+                "strain": 10.32857142854482,
+                "deformation": 0,
+                "channel": "CH10_S32",
+                "pointIndex": 16
+            },
+            {
+                "x": 16,
+                "y": 29,
+                "strain": 10.009523809499418,
+                "deformation": 0,
+                "channel": "CH10_S33",
+                "pointIndex": 16
+            },
+            {
+                "x": 17,
+                "y": 14,
+                "strain": 9.757142857127334,
+                "deformation": 0,
+                "channel": "CH10_S34",
+                "pointIndex": 17
+            },
+            {
+                "x": 17,
+                "y": 29,
+                "strain": 9.438095238081933,
+                "deformation": 0,
+                "channel": "CH10_S35",
+                "pointIndex": 17
+            },
+            {
+                "x": 18,
+                "y": 14,
+                "strain": 9.119047619036532,
+                "deformation": 0,
+                "channel": "CH10_S36",
+                "pointIndex": 18
+            },
+            {
+                "x": 18,
+                "y": 29,
+                "strain": 8.623809523791785,
+                "deformation": 0,
+                "channel": "CH10_S37",
+                "pointIndex": 18
+            },
+            {
+                "x": 19,
+                "y": 14,
+                "strain": 8.304761904746382,
+                "deformation": 0,
+                "channel": "CH10_S38",
+                "pointIndex": 19
+            },
+            {
+                "x": 19,
+                "y": 29,
+                "strain": 7.847619047599091,
+                "deformation": 0,
+                "channel": "CH10_S39",
+                "pointIndex": 19
+            },
+            {
+                "x": 20,
+                "y": 14,
+                "strain": 7.780952380925772,
+                "deformation": 0,
+                "channel": "CH10_S40",
+                "pointIndex": 20
+            },
+            {
+                "x": 20,
+                "y": 29,
+                "strain": 6.8857142856965465,
+                "deformation": 0,
+                "channel": "CH10_S41",
+                "pointIndex": 20
+            },
+            {
+                "x": 21,
+                "y": 14,
+                "strain": 7.033333333308941,
+                "deformation": 0,
+                "channel": "CH10_S42",
+                "pointIndex": 21
+            },
+            {
+                "x": 21,
+                "y": 29,
+                "strain": 6.138095238068629,
+                "deformation": 0,
+                "channel": "CH10_S43",
+                "pointIndex": 21
+            },
+            {
+                "x": 22,
+                "y": 14,
+                "strain": 6.285714285681024,
+                "deformation": 0,
+                "channel": "CH10_S44",
+                "pointIndex": 22
+            },
+            {
+                "x": 22,
+                "y": 29,
+                "strain": 5.252380952338821,
+                "deformation": 0,
+                "channel": "CH10_S45",
+                "pointIndex": 22
+            },
+            {
+                "x": 23,
+                "y": 14,
+                "strain": 5.380952380908032,
+                "deformation": 0,
+                "channel": "CH10_S46",
+                "pointIndex": 23
+            },
+            {
+                "x": 23,
+                "y": 29,
+                "strain": 4.4714285713908755,
+                "deformation": 0,
+                "channel": "CH10_S47",
+                "pointIndex": 23
+            },
+            {
+                "x": 24,
+                "y": 14,
+                "strain": 4.666666666633406,
+                "deformation": 0,
+                "channel": "CH10_S48",
+                "pointIndex": 24
+            },
+            {
+                "x": 24,
+                "y": 29,
+                "strain": 3.7571428571162477,
+                "deformation": 0,
+                "channel": "CH10_S49",
+                "pointIndex": 24
+            },
+            {
+                "x": 25,
+                "y": 14,
+                "strain": 3.857142857109596,
+                "deformation": 0,
+                "channel": "CH10_S50",
+                "pointIndex": 25
+            },
+            {
+                "x": 25,
+                "y": 29,
+                "strain": 2.852380952343256,
+                "deformation": 0,
+                "channel": "CH10_S51",
+                "pointIndex": 25
+            },
+            {
+                "x": 26,
+                "y": 14,
+                "strain": 2.96190476188037,
+                "deformation": 0,
+                "channel": "CH10_S52",
+                "pointIndex": 26
+            },
+            {
+                "x": 26,
+                "y": 29,
+                "strain": 2.661904761878153,
+                "deformation": 0,
+                "channel": "CH10_S53",
+                "pointIndex": 26
+            },
+            {
+                "x": 27,
+                "y": 14,
+                "strain": 2.695238095220356,
+                "deformation": 0,
+                "channel": "CH10_S54",
+                "pointIndex": 27
+            },
+            {
+                "x": 27,
+                "y": 29,
+                "strain": 2.733333333317811,
+                "deformation": 0,
+                "channel": "CH10_S55",
+                "pointIndex": 27
+            },
+            {
+                "x": 28,
+                "y": 14,
+                "strain": 2.728571428562559,
+                "deformation": 0,
+                "channel": "CH10_S56",
+                "pointIndex": 28
+            },
+            {
+                "x": 28,
+                "y": 29,
+                "strain": 2.7952380952358777,
+                "deformation": 0,
+                "channel": "CH10_S57",
+                "pointIndex": 28
+            },
+            {
+                "x": 29,
+                "y": 14,
+                "strain": 2.8285714285780807,
+                "deformation": 0,
+                "channel": "CH10_S58",
+                "pointIndex": 29
+            },
+            {
+                "x": 29,
+                "y": 29,
+                "strain": 2.8952380952513996,
+                "deformation": 0,
+                "channel": "CH10_S59",
+                "pointIndex": 29
+            },
+            {
+                "x": 30,
+                "y": 14,
+                "strain": 2.852380952398692,
+                "deformation": 0,
+                "channel": "CH10_S60",
+                "pointIndex": 30
+            },
+            {
+                "x": 30,
+                "y": 29,
+                "strain": 2.8333333333555077,
+                "deformation": 0,
+                "channel": "CH10_S61",
+                "pointIndex": 30
+            },
+            {
+                "x": 31,
+                "y": 14,
+                "strain": 2.6666666666999284,
+                "deformation": 0,
+                "channel": "CH10_S62",
+                "pointIndex": 31
+            },
+            {
+                "x": 31,
+                "y": 29,
+                "strain": 2.5000000000443485,
+                "deformation": 0,
+                "channel": "CH10_S63",
+                "pointIndex": 31
+            },
+            {
+                "x": 32,
+                "y": 14,
+                "strain": 2.2714285714817897,
+                "deformation": 0,
+                "channel": "CH10_S64",
+                "pointIndex": 32
+            },
+            {
+                "x": 32,
+                "y": 29,
+                "strain": 2.1047619048262103,
+                "deformation": 0,
+                "channel": "CH10_S65",
+                "pointIndex": 32
+            },
+            {
+                "x": 33,
+                "y": 14,
+                "strain": 1.923809523871612,
+                "deformation": 0,
+                "channel": "CH10_S66",
+                "pointIndex": 33
+            },
+            {
+                "x": 33,
+                "y": 29,
+                "strain": 1.6238095238693946,
+                "deformation": 0,
+                "channel": "CH10_S67",
+                "pointIndex": 33
+            },
+            {
+                "x": 34,
+                "y": 14,
+                "strain": 1.2428571429059265,
+                "deformation": 0,
+                "channel": "CH10_S68",
+                "pointIndex": 34
+            },
+            {
+                "x": 34,
+                "y": 29,
+                "strain": 0.8619047619424582,
+                "deformation": 0,
+                "channel": "CH10_S69",
+                "pointIndex": 34
+            },
+            {
+                "x": 35,
+                "y": 14,
+                "strain": 0.4809523809789902,
+                "deformation": 0,
+                "channel": "CH10_S70",
+                "pointIndex": 35
+            },
+            {
+                "x": 35,
+                "y": 29,
+                "strain": 0.19523809526470445,
+                "deformation": 0,
+                "channel": "CH10_S71",
+                "pointIndex": 35
+            },
+            {
+                "x": 36,
+                "y": 14,
+                "strain": 0.00952380955485361,
+                "deformation": 0,
+                "channel": "CH10_S72",
+                "pointIndex": 36
+            },
+            {
+                "x": 36,
+                "y": 29,
+                "strain": -0.08095238092798918,
+                "deformation": 0,
+                "channel": "CH10_S73",
+                "pointIndex": 36
+            },
+            {
+                "x": 37,
+                "y": 14,
+                "strain": -0.11428571425910507,
+                "deformation": 0,
+                "channel": "CH10_S74",
+                "pointIndex": 37
+            },
+            {
+                "x": 37,
+                "y": 29,
+                "strain": 0.023809523831698157,
+                "deformation": 0,
+                "channel": "CH10_S75",
+                "pointIndex": 37
+            },
+            {
+                "x": 38,
+                "y": 14,
+                "strain": 0.1095238095482013,
+                "deformation": 0,
+                "channel": "CH10_S76",
+                "pointIndex": 38
+            },
+            {
+                "x": 38,
+                "y": 29,
+                "strain": 0.2666666666932759,
+                "deformation": 0,
+                "channel": "CH10_S77",
+                "pointIndex": 38
+            },
+            {
+                "x": 39,
+                "y": 14,
+                "strain": 0.3619047619202839,
+                "deformation": 0,
+                "channel": "CH10_S78",
+                "pointIndex": 39
+            },
+            {
+                "x": 39,
+                "y": 29,
+                "strain": 0.5190476190653586,
+                "deformation": 0,
+                "channel": "CH10_S79",
+                "pointIndex": 39
+            },
+            {
+                "x": 40,
+                "y": 14,
+                "strain": 0.6047619047818616,
+                "deformation": 0,
+                "channel": "CH10_S80",
+                "pointIndex": 40
+            },
+            {
+                "x": 40,
+                "y": 29,
+                "strain": 0.7523809524053442,
+                "deformation": 0,
+                "channel": "CH10_S81",
+                "pointIndex": 40
+            },
+            {
+                "x": 41,
+                "y": 14,
+                "strain": 0.8619047619313711,
+                "deformation": 0,
+                "channel": "CH10_S82",
+                "pointIndex": 41
+            },
+            {
+                "x": 41,
+                "y": 29,
+                "strain": 0.666666666688841,
+                "deformation": 0,
+                "channel": "CH10_S83",
+                "pointIndex": 41
+            },
+            {
+                "x": 42,
+                "y": 14,
+                "strain": 0.4714285714463109,
+                "deformation": 0,
+                "channel": "CH10_S84",
+                "pointIndex": 42
+            },
+            {
+                "x": 42,
+                "y": 29,
+                "strain": 0.25714285714950946,
+                "deformation": 0,
+                "channel": "CH10_S85",
+                "pointIndex": 42
+            },
+            {
+                "x": 43,
+                "y": 14,
+                "strain": 0.06190476190697934,
+                "deformation": 0,
+                "channel": "CH10_S86",
+                "pointIndex": 43
+            },
+            {
+                "x": 43,
+                "y": 29,
+                "strain": -0.13809523809080324,
+                "deformation": 0,
+                "channel": "CH10_S87",
+                "pointIndex": 43
+            },
+            {
+                "x": 44,
+                "y": 14,
+                "strain": 0.08571428571650315,
+                "deformation": 0,
+                "channel": "CH10_S88",
+                "pointIndex": 44
+            },
+            {
+                "x": 44,
+                "y": 29,
+                "strain": -0.04285714285270799,
+                "deformation": 0,
+                "channel": "CH10_S89",
+                "pointIndex": 44
+            },
+            {
+                "x": 45,
+                "y": 14,
+                "strain": 0.22380952381839356,
+                "deformation": 0,
+                "channel": "CH10_S90",
+                "pointIndex": 45
+            },
+            {
+                "x": 45,
+                "y": 29,
+                "strain": 0.19047619048727765,
+                "deformation": 0,
+                "channel": "CH10_S91",
+                "pointIndex": 45
+            },
+            {
+                "x": 46,
+                "y": 14,
+                "strain": 0.5476190476301348,
+                "deformation": 0,
+                "channel": "CH10_S92",
+                "pointIndex": 46
+            },
+            {
+                "x": 46,
+                "y": 29,
+                "strain": 0.41428571429458405,
+                "deformation": 0,
+                "channel": "CH10_S93",
+                "pointIndex": 46
+            },
+            {
+                "x": 47,
+                "y": 14,
+                "strain": 0.6571428571450746,
+                "deformation": 0,
+                "channel": "CH10_S94",
+                "pointIndex": 47
+            },
+            {
+                "x": 47,
+                "y": 29,
+                "strain": 0.3714285714307889,
+                "deformation": 0,
+                "channel": "CH10_S95",
+                "pointIndex": 47
+            },
+            {
+                "x": 48,
+                "y": 14,
+                "strain": 0.4428571428593603,
+                "deformation": 0,
+                "channel": "CH10_S96",
+                "pointIndex": 48
+            },
+            {
+                "x": 48,
+                "y": 29,
+                "strain": 0.19047619047619047,
+                "deformation": 0,
+                "channel": "CH10_S97",
+                "pointIndex": 48
+            },
+            {
+                "x": 49,
+                "y": 14,
+                "strain": 0.24285714285049056,
+                "deformation": 0,
+                "channel": "CH10_S98",
+                "pointIndex": 49
+            },
+            {
+                "x": 49,
+                "y": 29,
+                "strain": -0.019047619043184177,
+                "deformation": 0,
+                "channel": "CH10_S99",
+                "pointIndex": 49
+            },
+            {
+                "x": 50,
+                "y": 14,
+                "strain": 0.0333333333311159,
+                "deformation": 0,
+                "channel": "CH10_S100",
+                "pointIndex": 50
+            },
+            {
+                "x": 50,
+                "y": 29,
+                "strain": -0.11428571428127941,
+                "deformation": 0,
+                "channel": "CH10_S101",
+                "pointIndex": 50
+            },
+            {
+                "x": 51,
+                "y": 14,
+                "strain": -0.07619047619491107,
+                "deformation": 0,
+                "channel": "CH10_S102",
+                "pointIndex": 51
+            },
+            {
+                "x": 51,
+                "y": 29,
+                "strain": -0.038095238108542706,
+                "deformation": 0,
+                "channel": "CH10_S103",
+                "pointIndex": 51
+            },
+            {
+                "x": 52,
+                "y": 14,
+                "strain": 0.3666666666422749,
+                "deformation": 0,
+                "channel": "CH10_S104",
+                "pointIndex": 52
+            },
+            {
+                "x": 52,
+                "y": 29,
+                "strain": 0.7714285713930925,
+                "deformation": 0,
+                "channel": "CH10_S105",
+                "pointIndex": 52
+            },
+            {
+                "x": 53,
+                "y": 14,
+                "strain": 1.1952380951981814,
+                "deformation": 0,
+                "channel": "CH10_S106",
+                "pointIndex": 53
+            },
+            {
+                "x": 53,
+                "y": 29,
+                "strain": 1.599999999948999,
+                "deformation": 0,
+                "channel": "CH10_S107",
+                "pointIndex": 53
+            },
+            {
+                "x": 54,
+                "y": 14,
+                "strain": 1.9333333332823324,
+                "deformation": 0,
+                "channel": "CH10_S108",
+                "pointIndex": 54
+            },
+            {
+                "x": 54,
+                "y": 29,
+                "strain": 1.8380952380553244,
+                "deformation": 0,
+                "channel": "CH10_S109",
+                "pointIndex": 54
+            },
+            {
+                "x": 55,
+                "y": 14,
+                "strain": 2.0952380952048335,
+                "deformation": 0,
+                "channel": "CH10_S110",
+                "pointIndex": 55
+            },
+            {
+                "x": 55,
+                "y": 29,
+                "strain": 1.9380952380597591,
+                "deformation": 0,
+                "channel": "CH10_S111",
+                "pointIndex": 55
+            },
+            {
+                "x": 55,
+                "y": 15,
+                "strain": 2.0999999999711734,
+                "deformation": 0,
+                "channel": "CH10_S112",
+                "pointIndex": 56
+            },
+            {
+                "x": 56,
+                "y": 29,
+                "strain": 1.8857142856965463,
+                "deformation": 0,
+                "channel": "CH10_S113",
+                "pointIndex": 56
+            },
+            {
+                "x": 55,
+                "y": 16,
+                "strain": 2.190476190465103,
+                "deformation": 0,
+                "channel": "CH10_S114",
+                "pointIndex": 57
+            },
+            {
+                "x": 57,
+                "y": 29,
+                "strain": 2.2142857142746273,
+                "deformation": 0,
+                "channel": "CH10_S115",
+                "pointIndex": 57
+            },
+            {
+                "x": 55,
+                "y": 17,
+                "strain": 2.628571428558124,
+                "deformation": 0,
+                "channel": "CH10_S116",
+                "pointIndex": 58
+            },
+            {
+                "x": 58,
+                "y": 29,
+                "strain": 2.576190476183824,
+                "deformation": 0,
+                "channel": "CH10_S117",
+                "pointIndex": 58
+            },
+            {
+                "x": 55,
+                "y": 18,
+                "strain": 2.790476190458451,
+                "deformation": 0,
+                "channel": "CH10_S118",
+                "pointIndex": 59
+            },
+            {
+                "x": 59,
+                "y": 29,
+                "strain": 2.5666666666511446,
+                "deformation": 0,
+                "channel": "CH10_S119",
+                "pointIndex": 59
+            },
+            {
+                "x": 55,
+                "y": 19,
+                "strain": 2.647619047601308,
+                "deformation": 0,
+                "channel": "CH10_S120",
+                "pointIndex": 60
+            },
+            {
+                "x": 60,
+                "y": 29,
+                "strain": 2.35238095236543,
+                "deformation": 0,
+                "channel": "CH10_S121",
+                "pointIndex": 60
+            },
+            {
+                "x": 55,
+                "y": 20,
+                "strain": 2.461904761869283,
+                "deformation": 0,
+                "channel": "CH10_S122",
+                "pointIndex": 61
+            },
+            {
+                "x": 61,
+                "y": 29,
+                "strain": 1.909523809494983,
+                "deformation": 0,
+                "channel": "CH10_S123",
+                "pointIndex": 61
+            },
+            {
+                "x": 55,
+                "y": 21,
+                "strain": 2.01904761902101,
+                "deformation": 0,
+                "channel": "CH10_S124",
+                "pointIndex": 62
+            },
+            {
+                "x": 62,
+                "y": 29,
+                "strain": 1.5666666666511446,
+                "deformation": 0,
+                "channel": "CH10_S125",
+                "pointIndex": 62
+            },
+            {
+                "x": 55,
+                "y": 22,
+                "strain": 1.6047619047486001,
+                "deformation": 0,
+                "channel": "CH10_S126",
+                "pointIndex": 63
+            },
+            {
+                "x": 63,
+                "y": 29,
+                "strain": 1.2047619047641223,
+                "deformation": 0,
+                "channel": "CH10_S127",
+                "pointIndex": 63
+            },
+            {
+                "x": 55,
+                "y": 23,
+                "strain": 1.2428571428615778,
+                "deformation": 0,
+                "channel": "CH10_S128",
+                "pointIndex": 64
+            },
+            {
+                "x": 64,
+                "y": 29,
+                "strain": 0.9714285714352238,
+                "deformation": 0,
+                "channel": "CH10_S129",
+                "pointIndex": 64
+            },
+            {
+                "x": 54,
+                "y": 23,
+                "strain": 1.161904761900327,
+                "deformation": 0,
+                "channel": "CH10_S130",
+                "pointIndex": 65
+            },
+            {
+                "x": 65,
+                "y": 29,
+                "strain": 0.9666666666577969,
+                "deformation": 0,
+                "channel": "CH10_S131",
+                "pointIndex": 65
+            },
+            {
+                "x": 53,
+                "y": 23,
+                "strain": 1.171428571421919,
+                "deformation": 0,
+                "channel": "CH10_S132",
+                "pointIndex": 66
+            },
+            {
+                "x": 66,
+                "y": 29,
+                "strain": 0.976190476179389,
+                "deformation": 0,
+                "channel": "CH10_S133",
+                "pointIndex": 66
+            },
+            {
+                "x": 52,
+                "y": 23,
+                "strain": 1.1476190476013082,
+                "deformation": 0,
+                "channel": "CH10_S134",
+                "pointIndex": 67
+            },
+            {
+                "x": 67,
+                "y": 29,
+                "strain": 0.7714285714152668,
+                "deformation": 0,
+                "channel": "CH10_S135",
+                "pointIndex": 67
+            },
+            {
+                "x": 51,
+                "y": 23,
+                "strain": 0.4809523809457287,
+                "deformation": 0,
+                "channel": "CH10_S136",
+                "pointIndex": 68
+            },
+            {
+                "x": 68,
+                "y": 29,
+                "strain": -0.09047619048284278,
+                "deformation": 0,
+                "channel": "CH10_S137",
+                "pointIndex": 68
+            },
+            {
+                "x": 50,
+                "y": 23,
+                "strain": -0.27142857143744115,
+                "deformation": 0,
+                "channel": "CH10_S138",
+                "pointIndex": 69
+            },
+            {
+                "x": 69,
+                "y": 29,
+                "strain": -0.771428571426354,
+                "deformation": 0,
+                "channel": "CH10_S139",
+                "pointIndex": 69
+            },
+            {
+                "x": 49,
+                "y": 23,
+                "strain": -0.7809523809479461,
+                "deformation": 0,
+                "channel": "CH10_S140",
+                "pointIndex": 70
+            },
+            {
+                "x": 70,
+                "y": 29,
+                "strain": -0.7904761904695382,
+                "deformation": 0,
+                "channel": "CH10_S141",
+                "pointIndex": 70
+            },
+            {
+                "x": 48,
+                "y": 23,
+                "strain": -0.6238095238028715,
+                "deformation": 0,
+                "channel": "CH10_S142",
+                "pointIndex": 71
+            },
+            {
+                "x": 71,
+                "y": 29,
+                "strain": -0.7666666666489272,
+                "deformation": 0,
+                "channel": "CH10_S143",
+                "pointIndex": 71
+            },
+            {
+                "x": 47,
+                "y": 23,
+                "strain": -0.2809523809368589,
+                "deformation": 0,
+                "channel": "CH10_S144",
+                "pointIndex": 72
+            },
+            {
+                "x": 72,
+                "y": 29,
+                "strain": -0.45714285712511765,
+                "deformation": 0,
+                "channel": "CH10_S145",
+                "pointIndex": 72
+            },
+            {
+                "x": 46,
+                "y": 23,
+                "strain": -0.10476190474860016,
+                "deformation": 0,
+                "channel": "CH10_S146",
+                "pointIndex": 73
+            },
+            {
+                "x": 73,
+                "y": 29,
+                "strain": -0.5809523809390763,
+                "deformation": 0,
+                "channel": "CH10_S147",
+                "pointIndex": 73
+            },
+            {
+                "x": 45,
+                "y": 23,
+                "strain": -0.23809523809523808,
+                "deformation": 0,
+                "channel": "CH10_S148",
+                "pointIndex": 74
+            },
+            {
+                "x": 74,
+                "y": 29,
+                "strain": -0.6666666666555795,
+                "deformation": 0,
+                "channel": "CH10_S149",
+                "pointIndex": 74
+            },
+            {
+                "x": 44,
+                "y": 23,
+                "strain": -0.3047619047574699,
+                "deformation": 0,
+                "channel": "CH10_S150",
+                "pointIndex": 75
+            },
+            {
+                "x": 75,
+                "y": 29,
+                "strain": -0.7142857142857143,
+                "deformation": 0,
+                "channel": "CH10_S151",
+                "pointIndex": 75
+            },
+            {
+                "x": 43,
+                "y": 23,
+                "strain": -0.3523809523876047,
+                "deformation": 0,
+                "channel": "CH10_S152",
+                "pointIndex": 76
+            },
+            {
+                "x": 76,
+                "y": 29,
+                "strain": -0.7428571428615778,
+                "deformation": 0,
+                "channel": "CH10_S153",
+                "pointIndex": 76
+            },
+            {
+                "x": 42,
+                "y": 23,
+                "strain": -0.3809523809634681,
+                "deformation": 0,
+                "channel": "CH10_S154",
+                "pointIndex": 77
+            },
+            {
+                "x": 77,
+                "y": 29,
+                "strain": -0.7523809524053442,
+                "deformation": 0,
+                "channel": "CH10_S155",
+                "pointIndex": 77
+            },
+            {
+                "x": 41,
+                "y": 23,
+                "strain": -0.5476190476523092,
+                "deformation": 0,
+                "channel": "CH10_S156",
+                "pointIndex": 78
+            },
+            {
+                "x": 78,
+                "y": 29,
+                "strain": -0.6952380952868789,
+                "deformation": 0,
+                "channel": "CH10_S157",
+                "pointIndex": 78
+            },
+            {
+                "x": 40,
+                "y": 23,
+                "strain": -0.5095238095659408,
+                "deformation": 0,
+                "channel": "CH10_S158",
+                "pointIndex": 79
+            },
+            {
+                "x": 79,
+                "y": 29,
+                "strain": -0.6571428572005105,
+                "deformation": 0,
+                "channel": "CH10_S159",
+                "pointIndex": 79
+            },
+            {
+                "x": 39,
+                "y": 23,
+                "strain": -0.39523809529574855,
+                "deformation": 0,
+                "channel": "CH10_S160",
+                "pointIndex": 80
+            },
+            {
+                "x": 80,
+                "y": 29,
+                "strain": -0.4904761905338438,
+                "deformation": 0,
+                "channel": "CH10_S161",
+                "pointIndex": 80
+            },
+            {
+                "x": 38,
+                "y": 23,
+                "strain": -0.5333333333865518,
+                "deformation": 0,
+                "channel": "CH10_S162",
+                "pointIndex": 81
+            },
+            {
+                "x": 81,
+                "y": 29,
+                "strain": -0.6809523809989471,
+                "deformation": 0,
+                "channel": "CH10_S163",
+                "pointIndex": 81
+            },
+            {
+                "x": 37,
+                "y": 23,
+                "strain": -0.7000000000421313,
+                "deformation": 0,
+                "channel": "CH10_S164",
+                "pointIndex": 82
+            },
+            {
+                "x": 82,
+                "y": 29,
+                "strain": -0.8238095238450027,
+                "deformation": 0,
+                "channel": "CH10_S165",
+                "pointIndex": 82
+            },
+            {
+                "x": 36,
+                "y": 23,
+                "strain": -0.8904761905072346,
+                "deformation": 0,
+                "channel": "CH10_S166",
+                "pointIndex": 83
+            },
+            {
+                "x": 83,
+                "y": 29,
+                "strain": -1.0142857143211932,
+                "deformation": 0,
+                "channel": "CH10_S167",
+                "pointIndex": 83
+            },
+            {
+                "x": 35,
+                "y": 23,
+                "strain": -0.742857142883752,
+                "deformation": 0,
+                "channel": "CH10_S168",
+                "pointIndex": 84
+            },
+            {
+                "x": 84,
+                "y": 29,
+                "strain": -0.8714285714529633,
+                "deformation": 0,
+                "channel": "CH10_S169",
+                "pointIndex": 84
+            },
+            {
+                "x": 34,
+                "y": 23,
+                "strain": -0.6476190476456568,
+                "deformation": 0,
+                "channel": "CH10_S170",
+                "pointIndex": 85
+            },
+            {
+                "x": 85,
+                "y": 29,
+                "strain": -0.7095238095526362,
+                "deformation": 0,
+                "channel": "CH10_S171",
+                "pointIndex": 85
+            },
+            {
+                "x": 33,
+                "y": 23,
+                "strain": -0.37619047620821566,
+                "deformation": 0,
+                "channel": "CH10_S172",
+                "pointIndex": 86
+            },
+            {
+                "x": 86,
+                "y": 29,
+                "strain": -0.20476190477520936,
+                "deformation": 0,
+                "channel": "CH10_S173",
+                "pointIndex": 86
+            },
+            {
+                "x": 32,
+                "y": 23,
+                "strain": 0.33809523807749864,
+                "deformation": 0,
+                "channel": "CH10_S174",
+                "pointIndex": 87
+            },
+            {
+                "x": 87,
+                "y": 29,
+                "strain": 0.29999999999113025,
+                "deformation": 0,
+                "channel": "CH10_S175",
+                "pointIndex": 87
+            },
+            {
+                "x": 31,
+                "y": 23,
+                "strain": 0.5952380952380952,
+                "deformation": 0,
+                "channel": "CH10_S176",
+                "pointIndex": 88
+            },
+            {
+                "x": 88,
+                "y": 29,
+                "strain": 0.652380952378735,
+                "deformation": 0,
+                "channel": "CH10_S177",
+                "pointIndex": 88
+            },
+            {
+                "x": 30,
+                "y": 23,
+                "strain": 0.8666666666755364,
+                "deformation": 0,
+                "channel": "CH10_S178",
+                "pointIndex": 89
+            },
+            {
+                "x": 89,
+                "y": 29,
+                "strain": 0.9238095238272633,
+                "deformation": 0,
+                "channel": "CH10_S179",
+                "pointIndex": 89
+            },
+            {
+                "x": 29,
+                "y": 23,
+                "strain": 1.0333333333754646,
+                "deformation": 0,
+                "channel": "CH10_S180",
+                "pointIndex": 90
+            },
+            {
+                "x": 90,
+                "y": 29,
+                "strain": 1.0857142857386775,
+                "deformation": 0,
+                "channel": "CH10_S181",
+                "pointIndex": 90
+            },
+            {
+                "x": 28,
+                "y": 23,
+                "strain": 1.1380952381018905,
+                "deformation": 0,
+                "channel": "CH10_S182",
+                "pointIndex": 91
+            },
+            {
+                "x": 91,
+                "y": 29,
+                "strain": 1.138095238079716,
+                "deformation": 0,
+                "channel": "CH10_S183",
+                "pointIndex": 91
+            },
+            {
+                "x": 27,
+                "y": 23,
+                "strain": 1.1380952380575418,
+                "deformation": 0,
+                "channel": "CH10_S184",
+                "pointIndex": 92
+            },
+            {
+                "x": 92,
+                "y": 29,
+                "strain": 1.0999999999600862,
+                "deformation": 0,
+                "channel": "CH10_S185",
+                "pointIndex": 92
+            },
+            {
+                "x": 26,
+                "y": 23,
+                "strain": 1.099999999948999,
+                "deformation": 0,
+                "channel": "CH10_S186",
+                "pointIndex": 93
+            },
+            {
+                "x": 93,
+                "y": 29,
+                "strain": 1.099999999948999,
+                "deformation": 0,
+                "channel": "CH10_S187",
+                "pointIndex": 93
+            },
+            {
+                "x": 25,
+                "y": 23,
+                "strain": 1.2809523809146846,
+                "deformation": 0,
+                "channel": "CH10_S188",
+                "pointIndex": 94
+            },
+            {
+                "x": 94,
+                "y": 29,
+                "strain": 1.4047619047286433,
+                "deformation": 0,
+                "channel": "CH10_S189",
+                "pointIndex": 94
+            },
+            {
+                "x": 24,
+                "y": 23,
+                "strain": 1.657142857111813,
+                "deformation": 0,
+                "channel": "CH10_S190",
+                "pointIndex": 95
+            },
+            {
+                "x": 95,
+                "y": 29,
+                "strain": 1.8095238094794608,
+                "deformation": 0,
+                "channel": "CH10_S191",
+                "pointIndex": 95
+            },
+            {
+                "x": 23,
+                "y": 23,
+                "strain": 3.4666666666245356,
+                "deformation": 0,
+                "channel": "CH10_S192",
+                "pointIndex": 96
+            },
+            {
+                "x": 96,
+                "y": 29,
+                "strain": 3.580952380916902,
+                "deformation": 0,
+                "channel": "CH10_S193",
+                "pointIndex": 96
+            },
+            {
+                "x": 22,
+                "y": 23,
+                "strain": 3.82380952377848,
+                "deformation": 0,
+                "channel": "CH10_S194",
+                "pointIndex": 97
+            },
+            {
+                "x": 97,
+                "y": 29,
+                "strain": 3.7285714285514717,
+                "deformation": 0,
+                "channel": "CH10_S195",
+                "pointIndex": 97
+            },
+            {
+                "x": 21,
+                "y": 23,
+                "strain": 4.180952380932424,
+                "deformation": 0,
+                "channel": "CH10_S196",
+                "pointIndex": 98
+            },
+            {
+                "x": 98,
+                "y": 29,
+                "strain": 4.314285714279062,
+                "deformation": 0,
+                "channel": "CH10_S197",
+                "pointIndex": 98
+            },
+            {
+                "x": 20,
+                "y": 23,
+                "strain": 4.866666666664449,
+                "deformation": 0,
+                "channel": "CH10_S198",
+                "pointIndex": 99
+            },
+            {
+                "x": 99,
+                "y": 29,
+                "strain": 4.809523809523809,
+                "deformation": 0,
+                "channel": "CH10_S199",
+                "pointIndex": 99
+            },
+            {
+                "x": 19,
+                "y": 23,
+                "strain": 5.652380952378735,
+                "deformation": 0,
+                "channel": "CH10_S200",
+                "pointIndex": 100
+            },
+            {
+                "x": 100,
+                "y": 29,
+                "strain": 5.6047619047486,
+                "deformation": 0,
+                "channel": "CH10_S201",
+                "pointIndex": 100
+            },
+            {
+                "x": 18,
+                "y": 23,
+                "strain": 6.404761904750818,
+                "deformation": 0,
+                "channel": "CH10_S202",
+                "pointIndex": 101
+            },
+            {
+                "x": 101,
+                "y": 29,
+                "strain": 6.619047619047619,
+                "deformation": 0,
+                "channel": "CH10_S203",
+                "pointIndex": 101
+            },
+            {
+                "x": 17,
+                "y": 23,
+                "strain": 7.419047619049836,
+                "deformation": 0,
+                "channel": "CH10_S204",
+                "pointIndex": 102
+            },
+            {
+                "x": 102,
+                "y": 29,
+                "strain": 7.633333333346638,
+                "deformation": 0,
+                "channel": "CH10_S205",
+                "pointIndex": 102
+            },
+            {
+                "x": 16,
+                "y": 23,
+                "strain": 8.447619047614612,
+                "deformation": 0,
+                "channel": "CH10_S206",
+                "pointIndex": 103
+            },
+            {
+                "x": 103,
+                "y": 29,
+                "strain": 8.638095238090804,
+                "deformation": 0,
+                "channel": "CH10_S207",
+                "pointIndex": 103
+            },
+            {
+                "x": 15,
+                "y": 23,
+                "strain": 8.871428571419703,
+                "deformation": 0,
+                "channel": "CH10_S208",
+                "pointIndex": 104
+            },
+            {
+                "x": 104,
+                "y": 29,
+                "strain": 8.838095238077498,
+                "deformation": 0,
+                "channel": "CH10_S209",
+                "pointIndex": 104
+            },
+            {
+                "x": 14,
+                "y": 23,
+                "strain": 8.947619047592438,
+                "deformation": 0,
+                "channel": "CH10_S210",
+                "pointIndex": 105
+            },
+            {
+                "x": 105,
+                "y": 29,
+                "strain": 8.947619047592438,
+                "deformation": 0,
+                "channel": "CH10_S211",
+                "pointIndex": 105
+            },
+            {
+                "x": 13,
+                "y": 23,
+                "strain": 9.033333333331116,
+                "deformation": 0,
+                "channel": "CH10_S212",
+                "pointIndex": 106
+            },
+            {
+                "x": 106,
+                "y": 29,
+                "strain": 7.509523809543767,
+                "deformation": 0,
+                "channel": "CH10_S213",
+                "pointIndex": 106
+            },
+            {
+                "x": 12,
+                "y": 23,
+                "strain": 8.052380952396474,
+                "deformation": 0,
+                "channel": "CH10_S214",
+                "pointIndex": 107
+            },
+            {
+                "x": 107,
+                "y": 29,
+                "strain": 7.709523809552636,
+                "deformation": 0,
+                "channel": "CH10_S215",
+                "pointIndex": 107
+            },
+            {
+                "x": 11,
+                "y": 23,
+                "strain": 7.876190476208215,
+                "deformation": 0,
+                "channel": "CH10_S216",
+                "pointIndex": 108
+            },
+            {
+                "x": 108,
+                "y": 29,
+                "strain": 7.347619047632352,
+                "deformation": 0,
+                "channel": "CH10_S217",
+                "pointIndex": 108
+            },
+            {
+                "x": 10,
+                "y": 23,
+                "strain": 7.514285714287932,
+                "deformation": 0,
+                "channel": "CH10_S218",
+                "pointIndex": 109
+            },
+            {
+                "x": 109,
+                "y": 29,
+                "strain": 6.985714285712068,
+                "deformation": 0,
+                "channel": "CH10_S219",
+                "pointIndex": 109
+            },
+            {
+                "x": 9,
+                "y": 23,
+                "strain": 7.4238095238050885,
+                "deformation": 0,
+                "channel": "CH10_S220",
+                "pointIndex": 110
+            },
+            {
+                "x": 110,
+                "y": 29,
+                "strain": 6.85238095236543,
+                "deformation": 0,
+                "channel": "CH10_S221",
+                "pointIndex": 110
+            },
+            {
+                "x": 8,
+                "y": 23,
+                "strain": 7.395238095218138,
+                "deformation": 0,
+                "channel": "CH10_S222",
+                "pointIndex": 111
+            },
+            {
+                "x": 111,
+                "y": 29,
+                "strain": 7.095238095227008,
+                "deformation": 0,
+                "channel": "CH10_S223",
+                "pointIndex": 111
+            },
+            {
+                "x": 7,
+                "y": 23,
+                "strain": 7.380952380941293,
+                "deformation": 0,
+                "channel": "CH10_S224",
+                "pointIndex": 112
+            },
+            {
+                "x": 112,
+                "y": 29,
+                "strain": 6.980952380945729,
+                "deformation": 0,
+                "channel": "CH10_S225",
+                "pointIndex": 112
+            },
+            {
+                "x": 6,
+                "y": 23,
+                "strain": 7.16666666665558,
+                "deformation": 0,
+                "channel": "CH10_S226",
+                "pointIndex": 113
+            },
+            {
+                "x": 113,
+                "y": 29,
+                "strain": 6.676190476199346,
+                "deformation": 0,
+                "channel": "CH10_S227",
+                "pointIndex": 113
+            },
+            {
+                "x": 5,
+                "y": 23,
+                "strain": 6.580952380961251,
+                "deformation": 0,
+                "channel": "CH10_S228",
+                "pointIndex": 114
+            },
+            {
+                "x": 114,
+                "y": 29,
+                "strain": 6.376190476197128,
+                "deformation": 0,
+                "channel": "CH10_S229",
+                "pointIndex": 114
+            },
+            {
+                "x": 4,
+                "y": 23,
+                "strain": 6.276190476192694,
+                "deformation": 0,
+                "channel": "CH10_S230",
+                "pointIndex": 115
+            },
+            {
+                "x": 115,
+                "y": 29,
+                "strain": 6.004761904766339,
+                "deformation": 0,
+                "channel": "CH10_S231",
+                "pointIndex": 115
+            },
+            {
+                "x": 3,
+                "y": 23,
+                "strain": 5.733333333339986,
+                "deformation": 0,
+                "channel": "CH10_S232",
+                "pointIndex": 116
+            },
+            {
+                "x": 116,
+                "y": 29,
+                "strain": 5.457142857125118,
+                "deformation": 0,
+                "channel": "CH10_S233",
+                "pointIndex": 116
+            },
+            {
+                "x": 2,
+                "y": 23,
+                "strain": 5.147619047579134,
+                "deformation": 0,
+                "channel": "CH10_S234",
+                "pointIndex": 117
+            },
+            {
+                "x": 117,
+                "y": 29,
+                "strain": 4.309523809479461,
+                "deformation": 0,
+                "channel": "CH10_S235",
+                "pointIndex": 117
+            },
+            {
+                "x": 1,
+                "y": 23,
+                "strain": 4.0142857142324955,
+                "deformation": 0,
+                "channel": "CH10_S236",
+                "pointIndex": 118
+            },
+            {
+                "x": 118,
+                "y": 29,
+                "strain": 3.552380952329951,
+                "deformation": 0,
+                "channel": "CH10_S237",
+                "pointIndex": 118
+            },
+            {
+                "x": 0,
+                "y": 23,
+                "strain": 3.447619047570264,
+                "deformation": 0,
+                "channel": "CH10_S238",
+                "pointIndex": 119
+            },
+            {
+                "x": 119,
+                "y": 29,
+                "strain": 2.9857142856677195,
+                "deformation": 0,
+                "channel": "CH10_S239",
+                "pointIndex": 119
+            },
+            {
+                "x": 120,
+                "y": 29,
+                "strain": 2.8761904761527797,
+                "deformation": 1.3705882352915986,
+                "channel": "CH10_S239",
+                "pointIndex": 120
+            },
+            {
+                "x": 121,
+                "y": 29,
+                "strain": 2.3809523809191195,
+                "deformation": 5.3830804543973105,
+                "channel": "CH10_S239",
+                "pointIndex": 121
+            },
+            {
+                "x": 122,
+                "y": 29,
+                "strain": 2.057142857107378,
+                "deformation": 11.784094631996595,
+                "channel": "CH10_S239",
+                "pointIndex": 122
+            },
+            {
+                "x": 123,
+                "y": 29,
+                "strain": 1.4904761904451465,
+                "deformation": 20.248555621073137,
+                "channel": "CH10_S239",
+                "pointIndex": 123
+            },
+            {
+                "x": 124,
+                "y": 29,
+                "strain": 0.9238095237829146,
+                "deformation": 30.37479009147921,
+                "channel": "CH10_S239",
+                "pointIndex": 124
+            },
+            {
+                "x": 125,
+                "y": 29,
+                "strain": 0.3333333333000718,
+                "deformation": 41.69397884966997,
+                "channel": "CH10_S239",
+                "pointIndex": 125
+            },
+            {
+                "x": 126,
+                "y": 29,
+                "strain": -0.1571428571783361,
+                "deformation": 53.74652870447279,
+                "channel": "CH10_S239",
+                "pointIndex": 126
+            },
+            {
+                "x": 127,
+                "y": 29,
+                "strain": -0.5857142857386775,
+                "deformation": 66.12766076530541,
+                "channel": "CH10_S239",
+                "pointIndex": 127
+            },
+            {
+                "x": 128,
+                "y": 29,
+                "strain": -0.919047619083098,
+                "deformation": 78.50738196600162,
+                "channel": "CH10_S239",
+                "pointIndex": 128
+            },
+            {
+                "x": 129,
+                "y": 29,
+                "strain": -1.0380952381307171,
+                "deformation": 90.66667042008912,
+                "channel": "CH10_S239",
+                "pointIndex": 129
+            },
+            {
+                "x": 130,
+                "y": 29,
+                "strain": -1.147619047656744,
+                "deformation": 102.5139681321879,
+                "channel": "CH10_S239",
+                "pointIndex": 130
+            },
+            {
+                "x": 131,
+                "y": 29,
+                "strain": -1.2190476190853154,
+                "deformation": 114.01988043634879,
+                "channel": "CH10_S239",
+                "pointIndex": 131
+            },
+            {
+                "x": 132,
+                "y": 29,
+                "strain": -1.2619047619491106,
+                "deformation": 125.17788016354578,
+                "channel": "CH10_S239",
+                "pointIndex": 132
+            },
+            {
+                "x": 133,
+                "y": 29,
+                "strain": -1.3619047619646327,
+                "deformation": 135.98635896368089,
+                "channel": "CH10_S239",
+                "pointIndex": 133
+            },
+            {
+                "x": 134,
+                "y": 29,
+                "strain": -1.4714285714684852,
+                "deformation": 146.41765677446364,
+                "channel": "CH10_S239",
+                "pointIndex": 134
+            },
+            {
+                "x": 135,
+                "y": 29,
+                "strain": -1.5619047619402409,
+                "deformation": 156.44787469284572,
+                "channel": "CH10_S239",
+                "pointIndex": 135
+            },
+            {
+                "x": 136,
+                "y": 29,
+                "strain": -1.6904761905205392,
+                "deformation": 166.08935168756892,
+                "channel": "CH10_S239",
+                "pointIndex": 136
+            },
+            {
+                "x": 137,
+                "y": 29,
+                "strain": -1.8857142857630693,
+                "deformation": 175.34299070282768,
+                "channel": "CH10_S239",
+                "pointIndex": 137
+            },
+            {
+                "x": 138,
+                "y": 29,
+                "strain": -2.1761904762326076,
+                "deformation": 184.14000512166913,
+                "channel": "CH10_S239",
+                "pointIndex": 138
+            },
+            {
+                "x": 139,
+                "y": 29,
+                "strain": -2.37619047623039,
+                "deformation": 192.36397065037724,
+                "channel": "CH10_S239",
+                "pointIndex": 139
+            },
+            {
+                "x": 140,
+                "y": 29,
+                "strain": -2.4700000000419093,
+                "deformation": 199.93669079655353,
+                "channel": "CH10_S239",
+                "pointIndex": 140
+            },
+            {
+                "x": 141,
+                "y": 29,
+                "strain": -2.5684210526830467,
+                "deformation": 206.84101512137408,
+                "channel": "CH10_S239",
+                "pointIndex": 141
+            },
+            {
+                "x": 142,
+                "y": 29,
+                "strain": -2.6444444445013584,
+                "deformation": 213.07501381610626,
+                "channel": "CH10_S239",
+                "pointIndex": 142
+            },
+            {
+                "x": 143,
+                "y": 29,
+                "strain": -2.6764705882900777,
+                "deformation": 218.64390184357435,
+                "channel": "CH10_S239",
+                "pointIndex": 143
+            },
+            {
+                "x": 144,
+                "y": 29,
+                "strain": -2.6875000000582077,
+                "deformation": 223.57357607650184,
+                "channel": "CH10_S239",
+                "pointIndex": 144
+            },
+            {
+                "x": 145,
+                "y": 29,
+                "strain": -2.7000000000620883,
+                "deformation": 227.9028142118914,
+                "channel": "CH10_S239",
+                "pointIndex": 145
+            },
+            {
+                "x": 146,
+                "y": 29,
+                "strain": -2.678571428621321,
+                "deformation": 231.68054088332752,
+                "channel": "CH10_S239",
+                "pointIndex": 146
+            },
+            {
+                "x": 147,
+                "y": 29,
+                "strain": -2.653846153881974,
+                "deformation": 234.9732798453206,
+                "channel": "CH10_S239",
+                "pointIndex": 147
+            },
+            {
+                "x": 148,
+                "y": 29,
+                "strain": -2.733333333376019,
+                "deformation": 237.83344984407412,
+                "channel": "CH10_S239",
+                "pointIndex": 148
+            },
+            {
+                "x": 149,
+                "y": 29,
+                "strain": -2.8363636364017357,
+                "deformation": 240.25892791734935,
+                "channel": "CH10_S239",
+                "pointIndex": 149
+            }
+        ],
+        "totalSensorCount": 400
+    },
+    "timestamp": 1773108240409
+}
