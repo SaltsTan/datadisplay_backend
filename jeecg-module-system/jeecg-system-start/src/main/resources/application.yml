@@ -129,4 +129,4 @@ jeecg:
 
 push:
   api:
-    url: http://127.0.0.1:8080/admin-api/ais/fiber-optic/data/upload
+    url: http://223.144.171.54:17081/admin-api/ais/fiber-optic/data/upload

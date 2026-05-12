@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.modules.basic.dto.PointDTO;
 import org.jeecg.modules.basic.dto.SensorCalculationRequest;
+import org.jeecg.modules.basic.job.DeformationDataPushJob;
 import org.jeecg.modules.basic.service.ISensorCalculationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,9 @@ public class DeformationController {
 
     @Autowired
     private ISensorCalculationService sensorCalculationService;
+
+    @Autowired
+    private DeformationDataPushJob deformationDataPushJob;
 
     /**
      * 1. 获取指定单个排体的形变数据
@@ -63,5 +67,19 @@ public class DeformationController {
             e.printStackTrace();
             return Result.error("全部排体计算异常: " + e.getMessage());
         }
+    }
+
+    @PostMapping("/send")
+    @ApiOperation(value="主动推送", notes="主动推送")
+    public Result<String> send(String dateStr) {
+        deformationDataPushJob.executePushDataTask(dateStr);
+        return Result.OK("执行推送成功!");
+    }
+
+    @PostMapping("/batchSend")
+    @ApiOperation(value="主动批量推送", notes="主动批量推送")
+    public Result<String> batchSend(String startDateStr, String endDateStr) {
+        deformationDataPushJob.executePushDataTaskForRange(startDateStr, endDateStr);
+        return Result.OK("执行推送成功!");
     }
 }

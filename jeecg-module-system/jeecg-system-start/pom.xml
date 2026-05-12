@@ -40,6 +40,26 @@
                     <includeSystemScope>true</includeSystemScope> <!-- 关键！强制包含 system scope 依赖 -->
                 </configuration>
             </plugin>
+            <plugin>
+                <!-- https://gitee.com/roseboy/classfinal -->
+                <groupId>net.roseboy</groupId>
+                <artifactId>classfinal-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <password>#</password><!--加密打包之后pom.xml会被删除，不用担心在jar包里找到此密码-->
+                    <packages>org.jeecg</packages>
+                    <cfgfiles>application.yml</cfgfiles>
+                    <excludes>org.spring</excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>classFinal</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>

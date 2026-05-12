@@ -388,6 +388,7 @@
 
 	<build>
 		<plugins>
+
 			<!-- 指定JDK编译版本 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -423,6 +424,7 @@
                     </nonFilteredFileExtensions>
                 </configuration>
             </plugin>
+
 		</plugins>
 		<resources>
 			<resource>
@@ -545,4 +547,5 @@
 			</modules>
 		</profile>
     </profiles>
+
 </project>
