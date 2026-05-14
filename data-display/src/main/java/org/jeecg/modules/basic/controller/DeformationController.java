@@ -30,9 +30,13 @@ public class DeformationController {
     /**
      * 1. 获取指定单个排体的形变数据
      * 返回结构: [ {x:0, y:0, strain:..., deformation:...}, ... ]
+     * 
+     * @deprecated 该接口已被 /surface/single 替代，建议使用新的曲面可视化接口
+     * @see org.jeecg.modules.basic.controller.SurfaceGenerationController#single
      */
+    @Deprecated
     @PostMapping("/calculateSingle")
-    @ApiOperation(value="单个排体数据", notes="单个排体数据")
+    @ApiOperation(value="单个排体数据(已废弃)", notes="该接口已废弃，请使用 /surface/single 获取曲面数据")
     public Result<List<PointDTO>> calculateSingle(@RequestBody SensorCalculationRequest request) {
         if (request.getTime1() == null || request.getTime2() == null || request.getRowBody() == null) {
             return Result.error("参数不完整，必须传入 time1, time2, rowBody");
@@ -51,9 +55,13 @@ public class DeformationController {
     /**
      * 2. 获取全部(19~25号)排体的形变数据 (新增需求)
      * 返回结构: { "19": [{x:0...}...], "20": [{x:0...}...] }
+     * 
+     * @deprecated 该接口已被 /surface/all 替代，建议使用新的曲面可视化接口
+     * @see org.jeecg.modules.basic.controller.SurfaceGenerationController#all
      */
+    @Deprecated
     @PostMapping("/calculateAll")
-    @ApiOperation(value="排体数据", notes="排体数据")
+    @ApiOperation(value="排体数据(已废弃)", notes="该接口已废弃，请使用 /surface/all 获取曲面数据")
     public Result<Map<String, List<PointDTO>>> calculateAll(@RequestBody SensorCalculationRequest request) {
         if (request.getTime1() == null || request.getTime2() == null) {
             return Result.error("参数不完整，必须传入 time1, time2");
