@@ -3,6 +3,8 @@ package org.jeecg.modules.basic.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.modules.basic.dto.DeformationSeriesDTO;
+import org.jeecg.modules.basic.dto.SensorRawDataDTO;
 import org.jeecg.modules.basic.dto.SurfaceRequestDTO;
 import org.jeecg.modules.basic.service.ISegmentedSurfaceService;
 import org.jeecg.modules.basic.service.ISurfaceGenerationService;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -77,6 +80,52 @@ public class SurfaceGenerationController {
         } catch (Exception e) {
             e.printStackTrace();
             return Result.error("全部分段曲面生成异常: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 导出全部排体(19~25)的原始波长和应变数据
+     */
+    @PostMapping("/export/strain")
+    @ApiOperation(value = "导出原始波长和应变数据", notes = "导出全部排体截取后的原始波长、波长差值和应变值")
+    public Result<Map<String, List<SensorRawDataDTO>>> exportStrain(@RequestBody SurfaceRequestDTO request) {
+        if (request.getTime1() == null || request.getTime2() == null) {
+            return Result.error("参数不完整，必须传入 time1, time2");
+        }
+
+        try {
+            Map<String, List<SensorRawDataDTO>> data = segmentedSurfaceService.exportStrainData(
+                    request.getTime1(), request.getTime2());
+            if (data == null || data.isEmpty()) {
+                return Result.error("未获取到数据");
+            }
+            return Result.OK("查询成功", data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("导出数据异常: " + e.getMessage());
+        }
+    }
+
+    /**
+     * 导出形变时间序列数据
+     */
+    @PostMapping("/export/deformation-series")
+    @ApiOperation(value = "导出形变时间序列", notes = "从time1次日12:00到time2当天12:00，每天12:00与time1做形变计算")
+    public Result<DeformationSeriesDTO> exportDeformationSeries(@RequestBody SurfaceRequestDTO request) {
+        if (request.getTime1() == null || request.getTime2() == null) {
+            return Result.error("参数不完整，必须传入 time1, time2");
+        }
+
+        try {
+            DeformationSeriesDTO data = segmentedSurfaceService.exportDeformationSeries(
+                    request.getTime1(), request.getTime2());
+            if (data == null || data.getData() == null || data.getData().isEmpty()) {
+                return Result.error("未获取到形变数据");
+            }
+            return Result.OK("计算成功", data);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("形变序列计算异常: " + e.getMessage());
         }
     }
 }

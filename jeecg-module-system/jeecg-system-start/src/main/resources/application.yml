@@ -130,3 +130,14 @@ jeecg:
 push:
   api:
     url: http://223.144.171.54:17081/admin-api/ais/fiber-optic/data/upload
+
+# DSS 数据接收服务配置
+dss:
+  server:
+    # TCP 监听端口
+    port: 9000
+    # 是否启用 DSS 接收服务
+    enabled: true
+  save:
+    # UUID 去重缓存大小（最近 N 条消息）
+    dedup-cache-size: 10000

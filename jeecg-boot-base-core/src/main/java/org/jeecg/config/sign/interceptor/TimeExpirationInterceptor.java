@@ -20,14 +20,15 @@ import java.time.format.DateTimeFormatter;
 public class TimeExpirationInterceptor implements HandlerInterceptor {
 
     // 截止时间：2026-06-01 00:00:00
-    private static final LocalDateTime DEADLINE = LocalDateTime.of(2026, 6, 1, 0, 0, 0);
-
+    public LocalDateTime getDeadline() {
+        return LocalDateTime.of(2026, 9, 1, 0, 0, 0);
+    }
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
 
         // 检查是否超过截止时间
-        if (now.isAfter(DEADLINE)) {
+        if (now.isAfter(getDeadline())) {
             log.warn("系统已过期，拒绝请求: {} | 当前时间: {}", request.getRequestURI(), now);
             
             // 设置响应头

@@ -755,7 +755,40 @@ public class SurfaceGenerationServiceImpl implements ISurfaceGenerationService {
         }
         dto.setGhostCableIndices(ghostIndices);
 
+        convertZUnitMmToM(dto);
+
         return dto;
+    }
+
+    private void convertZUnitMmToM(SurfaceMeshDTO dto) {
+        double[][] zGrid = dto.getZGrid();
+        if (zGrid != null) {
+            for (int i = 0; i < zGrid.length; i++)
+                if (zGrid[i] != null)
+                    for (int j = 0; j < zGrid[i].length; j++)
+                        zGrid[i][j] = round(zGrid[i][j] / 1000.0);
+        }
+        convertTrackUnit(dto.getLargeULeft());
+        convertTrackUnit(dto.getLargeURight());
+        convertTrackUnit(dto.getLargeUBottom());
+        convertTrackUnit(dto.getSmallULeft());
+        convertTrackUnit(dto.getSmallURight());
+        convertTrackUnit(dto.getSmallUBottom());
+    }
+
+    private void convertTrackUnit(List<double[]> track) {
+        if (track == null) return;
+        for (double[] pt : track) {
+            if (pt != null && pt.length >= 3) {
+                pt[0] = round(pt[0]);
+                pt[1] = round(pt[1]);
+                pt[2] = round(pt[2] / 1000.0);
+            }
+        }
+    }
+
+    private static double round(double v) {
+        return Math.round(v * 10000.0) / 10000.0;
     }
 
     private SkeletonCurveDTO findCurve(List<SkeletonCurveDTO> curves, SkeletonCurveDTO.CurveType type) {

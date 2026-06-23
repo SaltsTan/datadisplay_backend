@@ -34,8 +34,9 @@ import java.util.Map;
 @Component
 @Slf4j
 public class DeformationDataPushJob {
-    private static final LocalDateTime DEADLINE = LocalDateTime.of(2026, 6, 1, 0, 0, 0);
-
+    public LocalDateTime getDeadline() {
+        return LocalDateTime.of(2026, 9, 1, 0, 0, 0);
+    }
 
     @Autowired
     private ISensorCalculationService sensorCalculationService;
@@ -55,7 +56,7 @@ public class DeformationDataPushJob {
     public void executePushDataTask() {
         LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
         // 检查是否超过截止时间
-        if (now.isAfter(DEADLINE)) {
+        if (now.isAfter(getDeadline())) {
             return;
         }
         log.info("开始执行每日排体形变数据 .xyz 文件生成与推送任务...");
@@ -123,7 +124,7 @@ public class DeformationDataPushJob {
     public void executePushDataTask(String dateStr) {
         LocalDateTime now = LocalDateTime.now(ZoneId.systemDefault());
         // 检查是否超过截止时间
-        if (now.isAfter(DEADLINE)) {
+        if (now.isAfter(getDeadline())) {
             return;
         }
         log.info("开始执行每日排体形变数据 .xyz 文件生成与推送任务...");

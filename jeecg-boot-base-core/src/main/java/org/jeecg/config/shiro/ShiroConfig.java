@@ -75,7 +75,10 @@ public class ShiroConfig {
             }
         }
         // 配置不会被拦截的链接 顺序判断
-        filterChainDefinitionMap.put("/deformation/**", "anon"); //cas验证登录
+        filterChainDefinitionMap.put("/deformation/**", "anon");
+        filterChainDefinitionMap.put("/surface/**", "anon");  // 开放给第三方调用
+        filterChainDefinitionMap.put("/basic/basicData/**", "anon");  // 开放给第三方调用
+        filterChainDefinitionMap.put("/basic/*/**", "anon");  // 开放给第三方调用
         filterChainDefinitionMap.put("/sys/cas/client/validateLogin", "anon"); //cas验证登录
         filterChainDefinitionMap.put("/sys/randomImage/**", "anon"); //登录验证码接口排除
         filterChainDefinitionMap.put("/sys/checkCaptcha", "anon"); //登录验证码接口排除

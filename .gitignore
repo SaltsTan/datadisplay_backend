@@ -7,6 +7,11 @@ rebel.xml
 **/target
 **/logs
 
+## deploy
+deploy/wavedata.jar
+wavedata-deploy.zip
+wavedata-deploy.tar.gz
+
 ## front
 **/*.lock
 os_del.cmd

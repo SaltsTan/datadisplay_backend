@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jeecg.modules.basic.config.CableLengthConfig;
 import org.jeecg.modules.basic.config.DeformationConstants;
 import org.jeecg.modules.basic.dto.PointDTO;
+import org.jeecg.modules.basic.dto.SensorRawDataDTO;
+import org.jeecg.modules.basic.dto.DeformationSeriesDTO;
 import org.jeecg.modules.basic.entity.BasicData;
 import org.jeecg.modules.basic.entity.BasicDefaultValue;
 import org.jeecg.modules.basic.service.IBasicDataService;
@@ -101,6 +103,15 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
                 return null;
             }
 
+            // Step 2.5: 通道重排序
+            if ("22".equals(rowBody)) {
+                // 22号：大U跨越CH10+CH9，CH10正序在前，CH9反转后接在后面
+                filtered = reorderForRow22(filtered);
+            } else if ("25".equals(rowBody)) {
+                // 25号：小U跨越CH4+CH1，CH4正序在前，CH1反转后接在后面
+                filtered = reorderForRow25(filtered);
+            }
+
             // Step 3: 边分割
             EdgeSplitter.EdgeResult edges = EdgeSplitter.split(filtered, rowBody);
 
@@ -120,6 +131,10 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
             double[] adjSR = adjustEdgeLength(rawSR, rowBody, CableLengthConfig.CableEdge.SMALL_U_RIGHT);
             double[] adjSB = rawSB; // 横边不调整
 
+            // Step 5.5: 25号断裂检测（检查调整前的原始长度）
+            boolean isRow25Broken = "25".equals(rowBody) && rawLR.length > 0
+                    && rawLR.length <= DeformationConstants.P25_RIGHT_COUNT;
+
             // Step 6: 获取 C-Factor
             double cFactor = getCFactor(rowBody);
 
@@ -129,16 +144,17 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
             double[] defLL = invertEdge(strainLL, rowBody, CableLengthConfig.CableEdge.LARGE_U_LEFT, cFactor);
             double[] zLL = applyDenoising(defLL);
 
-            // 大U右侧（25号仅111个点，其余排体正常）
-            double[] strainLR = convertToStrain(adjLR);
-            double[] defLR = invertEdge(strainLR, rowBody, CableLengthConfig.CableEdge.LARGE_U_RIGHT, cFactor);
-            double[] zLR = applyDenoising(defLR);
-
-            // Step 7.5: 25号排体大U右侧断裂补偿（在形变值阶段处理）
-            // 右侧仅111个点已完成反演+去噪，左侧195个点已完成反演+去噪
-            // 补偿方式：左侧前84个形变值复制到右侧前端，右侧111个形变值统一加上左侧第84个点的形变值
-            if ("25".equals(rowBody) && isRow25BrokenCable(adjLR)) {
-                zLR = repairRow25Deformation(zLL, zLR);
+            // 大U右侧
+            double[] zLR;
+            if (isRow25Broken) {
+                // 断裂：跳过长度调整，直接反演原始数据，再补偿到195点
+                double[] strainLR = convertToStrain(rawLR);
+                double[] defLR = invertEdge(strainLR, rowBody, CableLengthConfig.CableEdge.LARGE_U_RIGHT, cFactor);
+                zLR = repairRow25Deformation(zLL, applyDenoising(defLR));
+            } else {
+                double[] strainLR = convertToStrain(adjLR);
+                double[] defLR = invertEdge(strainLR, rowBody, CableLengthConfig.CableEdge.LARGE_U_RIGHT, cFactor);
+                zLR = applyDenoising(defLR);
             }
 
             // 大U横边
@@ -181,10 +197,389 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                // 跳过无数据或异常的排体，继续处理下一个
             }
         }
         return results;
+    }
+
+    @Override
+    public Map<String, List<SensorRawDataDTO>> exportStrainData(String time1, String time2) {
+        Map<String, List<SensorRawDataDTO>> results = new LinkedHashMap<>();
+        for (String rowBody : TARGET_ROWS) {
+            try {
+                List<SensorRawDataDTO> rowData = exportSingleRowStrainData(time1, time2, rowBody);
+                if (rowData != null && !rowData.isEmpty()) {
+                    results.put(rowBody, rowData);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return results;
+    }
+
+    /**
+     * 导出单个排体截取后的原始波长和应变数据
+     * <p>
+     * 流程：
+     * 1. 读取 JSON 坐标文件获取通道和坐标
+     * 2. 查询 time1 和 time2 的原始波长数据
+     * 3. 岸边过滤 + 22号通道重排序
+     * 4. 边分割（EdgeSplitter）
+     * 5. 对每条边的每个点位，输出原始波长、波长差值、应变值
+     * 输出顺序：大U右侧→大U横边→大U左侧→小U右侧→小U横边→小U左侧
+     */
+    private List<SensorRawDataDTO> exportSingleRowStrainData(String time1, String time2, String rowBody) {
+        List<SensorRawDataDTO> resultList = new ArrayList<>();
+        try {
+            // 1. 读取 JSON 坐标配置
+            String jsonFilePath = "classpath:sensor-positions/sensor_positions_" + rowBody + ".json";
+            Resource resource = resourceLoader.getResource(jsonFilePath);
+            if (!resource.exists()) return resultList;
+
+            JsonNode rootNode;
+            try (InputStream is = resource.getInputStream()) {
+                rootNode = objectMapper.readTree(is);
+            }
+
+            String paitiKey = "排体" + rowBody + "号";
+            JsonNode paitiNode = rootNode.get(paitiKey);
+            if (paitiNode == null || !paitiNode.has("channels")) return resultList;
+
+            JsonNode channelsNode = paitiNode.get("channels");
+            List<String> channelNumbers = new ArrayList<>();
+            Iterator<String> fieldNames = channelsNode.fieldNames();
+            while (fieldNames.hasNext()) {
+                channelNumbers.add(fieldNames.next().replace("CH", ""));
+            }
+            if (channelNumbers.isEmpty()) return resultList;
+
+            // 2. 查询两个时间点的原始波长数据
+            Map<String, List<Double>> waveMap1 = fetchWavelengthData(channelNumbers, time1);
+            Map<String, List<Double>> waveMap2 = fetchWavelengthData(channelNumbers, time2);
+
+            // 3. 组装 PointDTO，同时缓存原始波长和经纬度
+            List<PointDTO> rawData = new ArrayList<>();
+            // key: "channel_pointIndex" → [wave1, wave2]
+            Map<String, double[]> waveCache = new HashMap<>();
+            // key: "channel_pointIndex" → [lon, lat]（可能为null）
+            Map<String, double[]> latlonCache = new HashMap<>();
+
+            Iterator<Map.Entry<String, JsonNode>> channelFields = channelsNode.fields();
+            while (channelFields.hasNext()) {
+                Map.Entry<String, JsonNode> entry = channelFields.next();
+                String chName = entry.getKey();
+                String chNum = chName.replace("CH", "");
+                JsonNode coordsNode = entry.getValue().get("coordinates");
+                if (coordsNode == null || !coordsNode.isArray()) continue;
+
+                List<Double> w1List = waveMap1.getOrDefault(chNum, new ArrayList<>());
+                List<Double> w2List = waveMap2.getOrDefault(chNum, new ArrayList<>());
+
+                for (int i = 0; i < coordsNode.size(); i++) {
+                    JsonNode coord = coordsNode.get(i);
+                    double x = coord.get(0).asDouble();
+                    double y = coord.get(1).asDouble();
+                    Double lon = coord.size() >= 3 ? coord.get(2).asDouble() : null;
+                    Double lat = coord.size() >= 4 ? coord.get(3).asDouble() : null;
+
+                    double val1 = (i < w1List.size()) ? w1List.get(i) : 0.0;
+                    double val2 = (i < w2List.size()) ? w2List.get(i) : 0.0;
+                    double diff = (val2 - val1) * 1000.0 / 1.2;
+
+                    PointDTO dto = new PointDTO();
+                    dto.setRowBody(rowBody);
+                    dto.setChannel(chName);
+                    dto.setPointIndex(i);
+                    dto.setOriginalX(x);
+                    dto.setOriginalY(y);
+                    dto.setLon(lon);
+                    dto.setLat(lat);
+                    dto.setZ(diff);
+                    rawData.add(dto);
+
+                    String cacheKey = chName + "_" + i;
+                    waveCache.put(cacheKey, new double[]{val1, val2});
+                    if (lon != null && lat != null) {
+                        latlonCache.put(cacheKey, new double[]{lon, lat});
+                    }
+                }
+            }
+
+            if (rawData.isEmpty()) return resultList;
+
+            // 4. 岸边过滤
+            List<PointDTO> filtered = applyShoreFilter(rawData, rowBody);
+            if (filtered == null || filtered.isEmpty()) return resultList;
+
+            // 通道重排序
+            if ("22".equals(rowBody)) {
+                // 22号：大U跨越CH10+CH9，CH10正序在前，CH9反转后接在后面
+                filtered = reorderForRow22(filtered);
+            } else if ("25".equals(rowBody)) {
+                // 25号：小U跨越CH4+CH1，CH4正序在前，CH1反转后接在后面
+                filtered = reorderForRow25(filtered);
+            }
+
+            // 5. 边分割（与形变展示一致）
+            EdgeSplitter.EdgeResult edges = EdgeSplitter.split(filtered, rowBody);
+
+            // 6. 长度调整（与形变展示一致，补齐点位留空）
+            List<PointDTO> adjLR = adjustEdgePoints(edges.largeURight, rowBody, CableLengthConfig.CableEdge.LARGE_U_RIGHT);
+            List<PointDTO> adjLL = adjustEdgePoints(edges.largeULeft, rowBody, CableLengthConfig.CableEdge.LARGE_U_LEFT);
+            List<PointDTO> adjSR = adjustEdgePoints(edges.smallURight, rowBody, CableLengthConfig.CableEdge.SMALL_U_RIGHT);
+            List<PointDTO> adjSL = adjustEdgePoints(edges.smallULeft, rowBody, CableLengthConfig.CableEdge.SMALL_U_LEFT);
+            // 横边不调整
+            List<PointDTO> adjLB = edges.largeUBottom;
+            List<PointDTO> adjSB = edges.smallUBottom;
+
+            // 7. 输出顺序：大U右侧→大U横边→大U左侧→小U右侧→小U横边→小U左侧
+            addEdgeExportData(resultList, adjLR, "大U右侧", rowBody, waveCache, latlonCache);
+            addEdgeExportData(resultList, adjLB, "大U横边", rowBody, waveCache, latlonCache);
+            addEdgeExportData(resultList, adjLL, "大U左侧", rowBody, waveCache, latlonCache);
+            addEdgeExportData(resultList, adjSR, "小U右侧", rowBody, waveCache, latlonCache);
+            addEdgeExportData(resultList, adjSB, "小U横边", rowBody, waveCache, latlonCache);
+            addEdgeExportData(resultList, adjSL, "小U左侧", rowBody, waveCache, latlonCache);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultList;
+    }
+
+    /**
+     * 对一条边的点位列表做长度调整（截取或补齐），与形变展示保持一致
+     * 截取：取尾部（高X端）目标长度个点
+     * 补齐：在首端插入 null 占位点（导出时留空）
+     */
+    private List<PointDTO> adjustEdgePoints(List<PointDTO> edgePoints, String rowBody, CableLengthConfig.CableEdge edgeType) {
+        int targetLength = CableLengthConfig.getTargetLength(rowBody, edgeType);
+        if (edgePoints == null) edgePoints = new ArrayList<>();
+        int actual = edgePoints.size();
+
+        if (actual == targetLength) return edgePoints;
+
+        if (actual > targetLength) {
+            // 截取：取尾部 targetLength 个点
+            return new ArrayList<>(edgePoints.subList(actual - targetLength, actual));
+        } else {
+            // 补齐：首端插入 null 占位点
+            int padCount = targetLength - actual;
+            List<PointDTO> result = new ArrayList<>();
+            for (int i = 0; i < padCount; i++) {
+                result.add(null); // null 表示补齐的虚拟点，导出时留空
+            }
+            result.addAll(edgePoints);
+            return result;
+        }
+    }
+
+    /**
+     * 将一条边的点位数据转换为导出 DTO 列表
+     * null 点位（补齐的虚拟点）直接跳过，不输出
+     */
+    private void addEdgeExportData(List<SensorRawDataDTO> resultList, List<PointDTO> edgePoints,
+                                    String edgeName, String rowBody,
+                                    Map<String, double[]> waveCache,
+                                    Map<String, double[]> latlonCache) {
+        if (edgePoints == null || edgePoints.isEmpty()) return;
+        int outputIndex = 0;
+        for (PointDTO p : edgePoints) {
+            if (p == null) continue;  // 跳过补齐的虚拟点
+
+            String cacheKey = p.getChannel() + "_" + p.getPointIndex();
+            double[] waves = waveCache.getOrDefault(cacheKey, new double[]{0, 0});
+            double[] latlon = latlonCache.get(cacheKey);
+
+            SensorRawDataDTO dto = new SensorRawDataDTO();
+            dto.setRowBody(rowBody);
+            dto.setEdgeName(edgeName);
+            dto.setPointIndex(outputIndex++);
+            dto.setChannel(p.getChannel());
+            dto.setOriginalX(p.getOriginalX());
+            dto.setOriginalY(p.getOriginalY());
+            dto.setWavelength1(waves[0]);
+            dto.setWavelength2(waves[1]);
+            double diff = waves[1] - waves[0];
+            dto.setWavelengthDiff(Math.round(diff * 10000.0) / 10000.0);
+            double strain = diff * 1000.0 / 1.2;
+            dto.setStrain(Math.round(strain * 100.0) / 100.0);
+            if (latlon != null) {
+                dto.setLon(latlon[0]);
+                dto.setLat(latlon[1]);
+            }
+            resultList.add(dto);
+        }
+    }
+
+    // ==================== 形变时间序列导出 ====================
+
+    @Override
+    public DeformationSeriesDTO exportDeformationSeries(String time1, String time2) {
+        DeformationSeriesDTO result = new DeformationSeriesDTO();
+
+        // 1. 生成时间序列（time1次日12:00 到 time2当天12:00）
+        List<String> timePoints = generateDailyNoonTimePoints(time1, time2);
+        result.setTimePoints(timePoints);
+
+        if (timePoints.isEmpty()) {
+            result.setData(new LinkedHashMap<>());
+            return result;
+        }
+
+        // 2. 对每个排体，计算每个时间点的形变
+        Map<String, DeformationSeriesDTO.RowDeformationData> dataMap = new LinkedHashMap<>();
+
+        for (String rowBody : TARGET_ROWS) {
+            try {
+                DeformationSeriesDTO.RowDeformationData rowData = computeRowDeformationSeries(time1, rowBody, timePoints);
+                if (rowData != null && rowData.getPoints() != null && !rowData.getPoints().isEmpty()) {
+                    dataMap.put(rowBody, rowData);
+                }
+            } catch (Exception e) {
+                System.err.println("排体" + rowBody + "形变序列计算失败: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
+
+        result.setData(dataMap);
+        return result;
+    }
+
+    /**
+     * 生成每天12:00的时间点列表
+     * 从 time1 次日12:00 开始，到 time2 当天12:00 结束
+     */
+    private List<String> generateDailyNoonTimePoints(String time1, String time2) {
+        List<String> timePoints = new ArrayList<>();
+        try {
+            java.time.LocalDateTime dt1 = java.time.LocalDateTime.parse(time1,
+                    java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            java.time.LocalDateTime dt2 = java.time.LocalDateTime.parse(time2,
+                    java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+            // 从 time1 次日12:00 开始
+            java.time.LocalDate startDate = dt1.toLocalDate().plusDays(1);
+            java.time.LocalDate endDate = dt2.toLocalDate();
+
+            java.time.format.DateTimeFormatter fmt = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+            java.time.LocalDate current = startDate;
+            while (!current.isAfter(endDate)) {
+                java.time.LocalDateTime noon = current.atTime(12, 0, 0);
+                timePoints.add(noon.format(fmt));
+                current = current.plusDays(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return timePoints;
+    }
+
+    /**
+     * 计算单个排体在多个时间点的形变序列
+     * 每个时间点都和 time1 做形变计算（复用 generateSegmentedSurface 的结果）
+     */
+    private DeformationSeriesDTO.RowDeformationData computeRowDeformationSeries(
+            String time1, String rowBody, List<String> timePoints) {
+
+        DeformationSeriesDTO.RowDeformationData rowData = new DeformationSeriesDTO.RowDeformationData();
+
+        // 先用第一个时间点计算一次，获取点位信息结构
+        SurfaceMeshDTO firstMesh = generateSegmentedSurface(time1, timePoints.get(0), rowBody);
+        if (firstMesh == null) return null;
+
+        // 提取点位信息（从6条轨迹中）
+        List<DeformationSeriesDTO.PointInfo> points = new ArrayList<>();
+        List<List<double[]>> allTracks = new ArrayList<>();
+        String[] edgeNames = {"大U左侧", "大U右侧", "大U横边", "小U左侧", "小U右侧", "小U横边"};
+        List<double[]>[] trackArrays = new List[]{
+                firstMesh.getLargeULeft(), firstMesh.getLargeURight(), firstMesh.getLargeUBottom(),
+                firstMesh.getSmallULeft(), firstMesh.getSmallURight(), firstMesh.getSmallUBottom()
+        };
+
+        // 构建 (X, Y) → (lon, lat) 映射表（从 JSON 坐标文件读取）
+        Map<String, double[]> coordLatlonMap = buildCoordLatlonMap(rowBody);
+
+        // 记录每条边的起始索引和长度
+        List<int[]> edgeRanges = new ArrayList<>(); // [startIdx, length]
+        int totalPoints = 0;
+
+        for (int e = 0; e < 6; e++) {
+            List<double[]> track = trackArrays[e];
+            if (track == null || track.isEmpty()) {
+                edgeRanges.add(new int[]{totalPoints, 0});
+                continue;
+            }
+            int startIdx = totalPoints;
+            for (int i = 0; i < track.size(); i++) {
+                double[] pt = track.get(i);
+                DeformationSeriesDTO.PointInfo info = new DeformationSeriesDTO.PointInfo();
+                info.setEdgeName(edgeNames[e]);
+                info.setChannel("");
+                info.setPointIndex(i);
+                info.setOriginalX(pt[0]);
+                info.setOriginalY(pt[1]);
+                // 查找经纬度
+                String coordKey = pt[0] + "_" + pt[1];
+                double[] latlon = coordLatlonMap.get(coordKey);
+                if (latlon != null) {
+                    info.setLon(latlon[0]);
+                    info.setLat(latlon[1]);
+                }
+                points.add(info);
+                totalPoints++;
+            }
+            edgeRanges.add(new int[]{startIdx, track.size()});
+        }
+
+        rowData.setPoints(points);
+
+        // 初始化形变二维数组 [点位数][时间点数]
+        List<List<Double>> deformations = new ArrayList<>();
+        for (int i = 0; i < totalPoints; i++) {
+            List<Double> row = new ArrayList<>();
+            for (int t = 0; t < timePoints.size(); t++) {
+                row.add(0.0);
+            }
+            deformations.add(row);
+        }
+
+        // 对每个时间点计算形变
+        for (int t = 0; t < timePoints.size(); t++) {
+            String timePoint = timePoints.get(t);
+            SurfaceMeshDTO mesh;
+            if (t == 0) {
+                mesh = firstMesh; // 第一个已经算过了
+            } else {
+                mesh = generateSegmentedSurface(time1, timePoint, rowBody);
+            }
+
+            if (mesh == null) continue;
+
+            // 提取各边的Z值
+            List<double[]>[] tracks = new List[]{
+                    mesh.getLargeULeft(), mesh.getLargeURight(), mesh.getLargeUBottom(),
+                    mesh.getSmallULeft(), mesh.getSmallURight(), mesh.getSmallUBottom()
+            };
+
+            for (int e = 0; e < 6; e++) {
+                int[] range = edgeRanges.get(e);
+                int startIdx = range[0];
+                int length = range[1];
+                List<double[]> track = tracks[e];
+                if (track == null) continue;
+
+                int copyLen = Math.min(length, track.size());
+                for (int i = 0; i < copyLen; i++) {
+                    double z = track.get(i).length >= 3 ? track.get(i)[2] : 0.0;
+                    deformations.get(startIdx + i).set(t, z);
+                }
+            }
+        }
+
+        rowData.setDeformations(deformations);
+        return rowData;
     }
 
     // ==================== 数据获取 ====================
@@ -594,7 +989,133 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
         return padding;
     }
 
+    /**
+     * 从 JSON 坐标文件构建 (X, Y) → (lon, lat) 映射表
+     * key 格式：originalX + "_" + originalY
+     */
+    private Map<String, double[]> buildCoordLatlonMap(String rowBody) {
+        Map<String, double[]> map = new HashMap<>();
+        try {
+            String jsonFilePath = "classpath:sensor-positions/sensor_positions_" + rowBody + ".json";
+            Resource resource = resourceLoader.getResource(jsonFilePath);
+            if (!resource.exists()) return map;
+
+            JsonNode rootNode;
+            try (InputStream is = resource.getInputStream()) {
+                rootNode = objectMapper.readTree(is);
+            }
+
+            JsonNode channelsNode = rootNode.path("排体" + rowBody + "号").path("channels");
+            if (channelsNode.isMissingNode()) return map;
+
+            Iterator<JsonNode> chIter = channelsNode.elements();
+            while (chIter.hasNext()) {
+                JsonNode ch = chIter.next();
+                JsonNode coords = ch.get("coordinates");
+                if (coords == null || !coords.isArray()) continue;
+                for (JsonNode coord : coords) {
+                    if (coord.size() >= 4) {
+                        double x = coord.get(0).asDouble();
+                        double y = coord.get(1).asDouble();
+                        double lon = coord.get(2).asDouble();
+                        double lat = coord.get(3).asDouble();
+                        map.put(x + "_" + y, new double[]{lon, lat});
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
     // ==================== 辅助方法 ====================
+
+    /**
+     * 22号排体通道重排序
+     * <p>
+     * 22号排体的大U光缆跨越CH10和CH9两个通道，需要特殊排序：
+     * CH10 在前（正序），CH9 反转后接在后面，形成连续的U形。
+     * 其他通道（小U）保持原样追加在后面。
+     *
+     * @param data 过滤后的点列表
+     * @return 重排序后的点列表
+     */
+    private List<PointDTO> reorderForRow22(List<PointDTO> data) {
+        Map<String, List<PointDTO>> channelGroups = data.stream()
+                .collect(Collectors.groupingBy(PointDTO::getChannel));
+
+        List<PointDTO> result = new ArrayList<>();
+
+        // CH10 在前（正序）
+        List<PointDTO> ch10 = channelGroups.remove("CH10");
+        if (ch10 != null && !ch10.isEmpty()) {
+            result.addAll(ch10);
+        }
+
+        // CH9 反转后接在后面
+        List<PointDTO> ch9 = channelGroups.remove("CH9");
+        if (ch9 != null && !ch9.isEmpty()) {
+            if (ch10 != null && !ch10.isEmpty()) {
+                Collections.reverse(ch9);
+            }
+            result.addAll(ch9);
+        }
+
+        // 其他通道（小U等）保持原样追加
+        for (List<PointDTO> remaining : channelGroups.values()) {
+            result.addAll(remaining);
+        }
+
+        return result;
+    }
+
+    /**
+     * 25号排体通道重排序
+     * <p>
+     * 25号排体的小U光缆跨越CH4和CH1两个通道：
+     * - CH4：Y=23→20（右侧→横边中段），正序在前
+     * - CH1：Y=14→19（左侧→横边中段），反转后接在后面
+     * 拼接后形成从右到左的连续小U形。
+     * 大U（CH3+CH2）和其他通道保持原样。
+     *
+     * @param data 过滤后的点列表
+     * @return 重排序后的点列表
+     */
+    private List<PointDTO> reorderForRow25(List<PointDTO> data) {
+        Map<String, List<PointDTO>> channelGroups = data.stream()
+                .collect(Collectors.groupingBy(PointDTO::getChannel));
+
+        List<PointDTO> result = new ArrayList<>();
+
+        // 大U相关通道（CH3、CH2）保持原样先放入
+        List<PointDTO> ch3 = channelGroups.remove("CH3");
+        if (ch3 != null && !ch3.isEmpty()) result.addAll(ch3);
+
+        List<PointDTO> ch2 = channelGroups.remove("CH2");
+        if (ch2 != null && !ch2.isEmpty()) result.addAll(ch2);
+
+        // 小U：CH4 正序在前，CH1 反转后接在后面
+        List<PointDTO> ch4 = channelGroups.remove("CH4");
+        List<PointDTO> ch1 = channelGroups.remove("CH1");
+
+        if (ch4 != null && !ch4.isEmpty()) {
+            result.addAll(ch4);
+        }
+        if (ch1 != null && !ch1.isEmpty()) {
+            if (ch4 != null && !ch4.isEmpty()) {
+                Collections.reverse(ch1);
+            }
+            result.addAll(ch1);
+        }
+
+        // 其他剩余通道追加
+        for (List<PointDTO> remaining : channelGroups.values()) {
+            result.addAll(remaining);
+        }
+
+        return result;
+    }
 
     /**
      * 从 PointDTO 列表中提取 Z 值数组
@@ -799,6 +1320,58 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
 
     // ==================== 横边闭合计算 ====================
 
+    /** 小U横边微观细节权重 */
+    private static final double SMALL_U_DETAIL_WEIGHT = 0.2;
+
+    /** 小U横边滑动平均窗口大小（用于提取微观细节） */
+    private static final int SMALL_U_BOTTOM_MA_WINDOW = 5;
+
+    /**
+     * 小U横边新算法：基准线（左右尾端线性插值） + 加权微观细节
+     * <p>
+     * 步骤：
+     * 1. 基准线：用 zSRFused[end] 和 zSLFused[end] 做线性插值（方向从右到左）
+     *    Base_SB[i] = Z_SR_final(end) + (Z_SL_final(end) - Z_SR_final(end)) * ratio
+     * 2. 提取细节：Detail_SB = zSB - movmean(zSB, 5)，去掉漂移只保留微观起伏
+     * 3. 加权叠加：Z_SB_final[i] = Base_SB[i] + Detail_SB[i] * 0.2
+     *
+     * @param zSLFused 小U左侧融合后的形变值
+     * @param zSRFused 小U右侧融合后的形变值
+     * @param zSB      小U横边原始反演形变值（方向从右到左）
+     * @return 闭合后的小U横边形变值
+     */
+    private double[] buildSmallUBottom(double[] zSLFused, double[] zSRFused, double[] zSB) {
+        if (zSB == null || zSB.length == 0) return new double[0];
+
+        int n = zSB.length;
+        double[] result = new double[n];
+
+        // 获取左右尾端值
+        double zSREnd = (zSRFused != null && zSRFused.length > 0) ? zSRFused[zSRFused.length - 1] : 0.0;
+        double zSLEnd = (zSLFused != null && zSLFused.length > 0) ? zSLFused[zSLFused.length - 1] : 0.0;
+
+        // Step 1: 生成基准线（从右端到左端线性插值）
+        double[] baseSB = new double[n];
+        for (int i = 0; i < n; i++) {
+            double ratio = n > 1 ? (double) i / (n - 1) : 0;
+            baseSB[i] = zSREnd + (zSLEnd - zSREnd) * ratio;
+        }
+
+        // Step 2: 提取微观细节（原始值 - 滑动平均趋势）
+        double[] localTrend = MathUtils.movingAverage(zSB, SMALL_U_BOTTOM_MA_WINDOW);
+        double[] detailSB = new double[n];
+        for (int i = 0; i < n; i++) {
+            detailSB[i] = zSB[i] - localTrend[i];
+        }
+
+        // Step 3: 加权叠加（基准线 + 微观细节 × 权重）
+        for (int i = 0; i < n; i++) {
+            result[i] = baseSB[i] + detailSB[i] * SMALL_U_DETAIL_WEIGHT;
+        }
+
+        return result;
+    }
+
     /**
      * 大U横边闭合计算
      * <p>
@@ -890,9 +1463,8 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
         double[] zSLFused = fusionResult.zSmallLeftFused;
         double[] zSRFused = fusionResult.zSmallRightFused;
 
-        // Step 3.5: 小U横边闭合（与大U横边相同的闭合公式）
-        // 小U横边起点拼接在小U右侧尾端，终点接近小U左侧尾端
-        double[] zSBClosed = closeBigUBottom(zSLFused, zSRFused, zSB);
+        // Step 3.5: 小U横边新算法 = 基准线（左右尾端线性插值） + 加权微观细节
+        double[] zSBClosed = buildSmallUBottom(zSLFused, zSRFused, zSB);
 
         // Step 4: Ghost nodes
         GhostNodeService ghostNodeService = new GhostNodeService();
@@ -903,8 +1475,8 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
         // Step 5: Build control points for TPS（对每条边降采样以控制总点数）
         List<double[]> controlPoints = new ArrayList<>();
 
-        // 每条边最多取 40 个采样点（6条边 × 40 = 240 + 幽灵节点约100 = 340，在500限制内）
-        final int MAX_EDGE_SAMPLES = 40;
+        // 每条边最多取 80 个采样点（6条边 × 80 = 480，在500限制内）
+        final int MAX_EDGE_SAMPLES = 80;
 
         // Large U Left track
         addSampledTrack(controlPoints, zLL, DeformationConstants.BIG_U_LEFT_Y, MAX_EDGE_SAMPLES);
@@ -961,12 +1533,18 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
         ThinPlateSplineInterpolator tps = new ThinPlateSplineInterpolator();
         tps.buildModel(controlPoints);
 
-        int gridWidth = DeformationConstants.GRID_X_STEPS;   // 201
-        int gridHeight = DeformationConstants.GRID_Y_STEPS;  // 81
+        // 网格固定为 201×101：X=0~200（步长1m），Y=-5~45（步长0.5m）
+        // X方向扩展到200统一长度，Y方向两侧各外扩5m用于全部展示模式的拼接平滑
+        int gridWidth = 201;
+        int gridHeight = 101;
+        double xMinVal = 0.0;
+        double xMaxVal = 200.0;
+        double yMinVal = -5.0;
+        double yMaxVal = 45.0;
         double[] gridX = new double[gridWidth];
         double[] gridY = new double[gridHeight];
-        for (int i = 0; i < gridWidth; i++) gridX[i] = i * DeformationConstants.GRID_DX;
-        for (int j = 0; j < gridHeight; j++) gridY[j] = j * DeformationConstants.GRID_DY;
+        for (int i = 0; i < gridWidth; i++) gridX[i] = xMinVal + i * (xMaxVal - xMinVal) / (gridWidth - 1);
+        for (int j = 0; j < gridHeight; j++) gridY[j] = yMinVal + j * (yMaxVal - yMinVal) / (gridHeight - 1);
 
         double[][] zGrid;
         if (tps.isSolved()) {
@@ -985,10 +1563,10 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
         dto.setRowBody(rowBody);
         dto.setGridWidth(gridWidth);
         dto.setGridHeight(gridHeight);
-        dto.setXMin(-10);
-        dto.setXMax(DeformationConstants.RAFT_LENGTH);
-        dto.setYMin(0);
-        dto.setYMax(DeformationConstants.RAFT_WIDTH);
+        dto.setXMin(xMinVal);
+        dto.setXMax(xMaxVal);
+        dto.setYMin(yMinVal);
+        dto.setYMax(yMaxVal);
         dto.setZGrid(zGrid);
 
         // Step 8: Build 6 cable tracks
@@ -1039,8 +1617,50 @@ public class SegmentedSurfaceServiceImpl implements ISegmentedSurfaceService {
             dto.setGhostCableIndices(new ArrayList<>());
         }
 
+        // Step 11: 单位转换 mm → m
+        convertZUnitMmToM(dto);
+
         return dto;
     }
+
+    /**
+     * 将 SurfaceMeshDTO 中所有 Z 值的单位从 mm 转换为 m（除以1000）
+     */
+    private void convertZUnitMmToM(SurfaceMeshDTO dto) {
+        double[][] zGrid = dto.getZGrid();
+        if (zGrid != null) {
+            for (int i = 0; i < zGrid.length; i++) {
+                if (zGrid[i] != null) {
+                    for (int j = 0; j < zGrid[i].length; j++) {
+                        zGrid[i][j] = round(zGrid[i][j] / 1000.0);
+                    }
+                }
+            }
+        }
+        convertTrackUnit(dto.getLargeULeft());
+        convertTrackUnit(dto.getLargeURight());
+        convertTrackUnit(dto.getLargeUBottom());
+        convertTrackUnit(dto.getSmallULeft());
+        convertTrackUnit(dto.getSmallURight());
+        convertTrackUnit(dto.getSmallUBottom());
+    }
+
+    private void convertTrackUnit(List<double[]> track) {
+        if (track == null) return;
+        for (double[] pt : track) {
+            if (pt != null && pt.length >= 3) {
+                pt[0] = round(pt[0]);
+                pt[1] = round(pt[1]);
+                pt[2] = round(pt[2] / 1000.0);
+            }
+        }
+    }
+
+    /** 消除浮点精度：四舍五入到合理小数位（z值4位≈0.1mm，坐标2位≈1cm） */
+    private static double round(double v) {
+        return Math.round(v * 10000.0) / 10000.0;
+    }
+
 
     /**
      * 构建光缆轨迹点列表

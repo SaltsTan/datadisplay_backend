@@ -44,19 +44,14 @@ spring:
           slow-sql-millis: 5000
       datasource:
         master:
-          url: jdbc:mysql://localhost:3306/wavedata?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
-          username: root
-          password: root
+          url: jdbc:mysql://223.144.171.54:17083/uwfbgs?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
+          username: uwfbgs_rw
+          password: Uwf_Rw_2026_xY
           driver-class-name: com.mysql.cj.jdbc.Driver
-#          url: jdbc:dm://10.9.136.83:5236/?schema=SMART_SECURITY_XJB&compatibleMode=oracle&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8
-#          username: SYSDBA
-#          password: DMDBA_hust4400
-#          driverClassName: dm.jdbc.driver.DmDriver
-#          # 多数据源配置
-#        sql-server:
-#          url: jdbc:postgresql://192.168.0.115:5431/guard_tour_test?stringtype=unspecified
+#          url: jdbc:mysql://localhost:3306/wavedata?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&allowMultiQueries=true&allowPublicKeyRetrieval=true&useSSL=false
 #          username: root
-#          password: hylb12#$
+#          password: root
+#          driver-class-name: com.mysql.cj.jdbc.Driver
   #redis 配置
   redis:
     database: 3
@@ -183,4 +178,8 @@ gt:
 
 patrol:
   startSyncTime: "2025-01-01 00:00:00"
+
+
+knife4j:
+  production: true
 

@@ -50,6 +50,7 @@
                     <packages>org.jeecg</packages>
                     <cfgfiles>application.yml</cfgfiles>
                     <excludes>org.spring</excludes>
+                    <libjars>data-display-${jeecgboot.version}.jar,jeecg-system-biz-${jeecgboot.version}.jar</libjars>
                 </configuration>
                 <executions>
                     <execution>

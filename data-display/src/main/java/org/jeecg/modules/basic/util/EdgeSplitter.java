@@ -73,6 +73,20 @@ public class EdgeSplitter {
                 result.largeULeft = reindex(largeU.subList(0, c1 + 1));
                 result.largeUBottom = reindex(largeU.subList(c1 + 1, c2 + 1));
                 result.largeURight = reindex(largeU.subList(c2 + 1, largeU.size()));
+
+                // 校正左右颠倒：大U形状的行走方向可能从Y≈29侧开始，导致拆分后的
+                // "左"边实际Y≈29、"右"边实际Y≈10。按Y坐标分布判定并交换。
+                if (!result.largeULeft.isEmpty() && !result.largeURight.isEmpty()) {
+                    int leftAtY10 = countNearY(result.largeULeft, 10.0);
+                    int leftAtY29 = countNearY(result.largeULeft, 29.0);
+                    int rightAtY10 = countNearY(result.largeURight, 10.0);
+                    int rightAtY29 = countNearY(result.largeURight, 29.0);
+                    if (leftAtY29 > leftAtY10 && rightAtY10 > rightAtY29) {
+                        List<PointDTO> tmp = result.largeULeft;
+                        result.largeULeft = result.largeURight;
+                        result.largeURight = tmp;
+                    }
+                }
             } else {
                 // 未检测到两个拐点，大U作为单条边不拆分（放入largeULeft）
                 result.largeULeft = reindex(largeU);
@@ -174,8 +188,11 @@ public class EdgeSplitter {
     /**
      * 通过坐标方向变化检测两个拐点
      * <p>
-     * 第一个拐点：相邻点从X方向变化为主转变为Y方向变化为主
-     * 第二个拐点：从Y方向变化为主转变为X方向变化为主
+     * 使用滑动窗口检测方向变化：
+     * 第一个拐点：前方窗口以X方向为主，后方窗口以Y方向为主
+     * 第二个拐点：前方窗口以Y方向为主，后方窗口以X方向为主
+     * <p>
+     * 窗口大小为3个点，通过累计方向判断，兼容个别点缺失的情况。
      *
      * @return int[2]，分别为第一个和第二个拐点的索引，未检测到时为-1
      */
@@ -183,41 +200,48 @@ public class EdgeSplitter {
         if (points == null || points.size() < 10) return new int[]{-1, -1};
 
         int c1 = -1, c2 = -1;
+        int windowSize = 3;
 
-        // 查找第一个拐点：X方向变化为主 → Y方向变化为主
-        for (int i = 2; i < points.size() - 2; i++) {
-            PointDTO prev = points.get(i - 1);
-            PointDTO curr = points.get(i);
-            PointDTO next = points.get(i + 1);
+        // 查找第一个拐点：前方X为主 → 后方Y为主
+        for (int i = windowSize; i < points.size() - windowSize; i++) {
+            // 前方窗口：检查 i-windowSize ~ i 这几步是否以X方向为主
+            double prevDxSum = 0, prevDySum = 0;
+            for (int k = i - windowSize; k < i; k++) {
+                prevDxSum += Math.abs(points.get(k + 1).getOriginalX() - points.get(k).getOriginalX());
+                prevDySum += Math.abs(points.get(k + 1).getOriginalY() - points.get(k).getOriginalY());
+            }
 
-            // prev→curr: X方向变化为主（deltaX > 0.5 且 deltaY < 0.5）
-            boolean isPrevVertical = Math.abs(curr.getOriginalX() - prev.getOriginalX()) > 0.5
-                    && Math.abs(curr.getOriginalY() - prev.getOriginalY()) < 0.5;
-            // curr→next: Y方向变化为主（deltaX < 0.5 且 deltaY > 0.5）
-            boolean isNextHorizontal = Math.abs(next.getOriginalX() - curr.getOriginalX()) < 0.5
-                    && Math.abs(next.getOriginalY() - curr.getOriginalY()) > 0.5;
+            // 后方窗口：检查 i ~ i+windowSize 这几步是否以Y方向为主
+            double nextDxSum = 0, nextDySum = 0;
+            for (int k = i; k < i + windowSize; k++) {
+                nextDxSum += Math.abs(points.get(k + 1).getOriginalX() - points.get(k).getOriginalX());
+                nextDySum += Math.abs(points.get(k + 1).getOriginalY() - points.get(k).getOriginalY());
+            }
 
-            if (isPrevVertical && isNextHorizontal) {
+            // 前方X为主（X累计 > Y累计 * 2）且后方Y为主（Y累计 > X累计 * 2）
+            if (prevDxSum > prevDySum * 2 && nextDySum > nextDxSum * 2) {
                 c1 = i;
                 break;
             }
         }
 
-        // 查找第二个拐点：Y方向变化为主 → X方向变化为主
-        int searchStart = c1 != -1 ? c1 + 2 : 2;
-        for (int i = searchStart; i < points.size() - 2; i++) {
-            PointDTO prev = points.get(i - 1);
-            PointDTO curr = points.get(i);
-            PointDTO next = points.get(i + 1);
+        // 查找第二个拐点：前方Y为主 → 后方X为主
+        int searchStart = c1 != -1 ? c1 + windowSize : windowSize;
+        for (int i = searchStart; i < points.size() - windowSize; i++) {
+            double prevDxSum = 0, prevDySum = 0;
+            for (int k = i - windowSize; k < i; k++) {
+                prevDxSum += Math.abs(points.get(k + 1).getOriginalX() - points.get(k).getOriginalX());
+                prevDySum += Math.abs(points.get(k + 1).getOriginalY() - points.get(k).getOriginalY());
+            }
 
-            // prev→curr: Y方向变化为主（deltaX < 0.5 且 deltaY > 0.5）
-            boolean isPrevHorizontal = Math.abs(curr.getOriginalX() - prev.getOriginalX()) < 0.5
-                    && Math.abs(curr.getOriginalY() - prev.getOriginalY()) > 0.5;
-            // curr→next: X方向变化为主（deltaX > 0.5 且 deltaY < 0.5）
-            boolean isNextVertical = Math.abs(next.getOriginalX() - curr.getOriginalX()) > 0.5
-                    && Math.abs(next.getOriginalY() - curr.getOriginalY()) < 0.5;
+            double nextDxSum = 0, nextDySum = 0;
+            for (int k = i; k < i + windowSize; k++) {
+                nextDxSum += Math.abs(points.get(k + 1).getOriginalX() - points.get(k).getOriginalX());
+                nextDySum += Math.abs(points.get(k + 1).getOriginalY() - points.get(k).getOriginalY());
+            }
 
-            if (isPrevHorizontal && isNextVertical) {
+            // 前方Y为主 且 后方X为主
+            if (prevDySum > prevDxSum * 2 && nextDxSum > nextDySum * 2) {
                 c2 = i;
                 break;
             }
@@ -227,46 +251,71 @@ public class EdgeSplitter {
     }
 
     /**
-     * 将剩余形状段按Y坐标分类为小U的左侧、右侧、横边
+     * 将剩余形状段分类为小U的左侧、横边、右侧
      * <p>
-     * - originalY == 14.0 → 小U左侧
-     * - originalY == 23.0 → 小U右侧
-     * - Y在14~23之间变化 → 小U横边
+     * 策略：
+     * 1. 对每个形状段，先检查是否是"混合段"（Y范围跨越14~23，即包含左侧+横边+右侧）
+     * 2. 混合段：用 findCornerIndices 检测拐点，分割为右侧/横边/左侧（与大U方向一致）
+     * 3. 纯Y≈14段：归为左侧；纯Y≈23段：归为右侧；Y变化段：归为横边
      */
     static void classifySmallUShapes(List<List<PointDTO>> remainingShapes, EdgeResult result) {
         for (List<PointDTO> shape : remainingShapes) {
             if (shape.isEmpty()) continue;
 
-            // 检查该形状段中点的Y坐标分布
-            boolean allY14 = true;
-            boolean allY23 = true;
-            boolean hasYVariation = false;
             double minY = Double.MAX_VALUE;
-            double maxY = Double.MIN_VALUE;
+            double maxY = -Double.MAX_VALUE;
+            int countY14 = 0, countY23 = 0;
 
             for (PointDTO p : shape) {
                 double y = p.getOriginalY();
-                if (Math.abs(y - 14.0) > 0.5) allY14 = false;
-                if (Math.abs(y - 23.0) > 0.5) allY23 = false;
                 minY = Math.min(minY, y);
                 maxY = Math.max(maxY, y);
+                if (Math.abs(y - 14.0) <= 1.0) countY14++;
+                if (Math.abs(y - 23.0) <= 1.0) countY23++;
             }
 
-            if (maxY - minY > 1.0) {
-                hasYVariation = true;
-            }
+            boolean isMixed = (minY <= 15.0 && maxY >= 22.0); // 跨越小U左右两侧
 
-            if (allY14) {
-                // 小U左侧
-                result.smallULeft.addAll(shape);
-            } else if (allY23) {
-                // 小U右侧
-                result.smallURight.addAll(shape);
-            } else if (hasYVariation && minY >= 13.5 && maxY <= 23.5) {
-                // Y在14~23之间变化 → 小U横边
+            if (isMixed && shape.size() >= 10) {
+                // 混合段：用拐点检测分割为右侧/横边/左侧
+                int[] corners = findCornerIndices(shape);
+                int c1 = corners[0];
+                int c2 = corners[1];
+
+                if (c1 > 0 && c2 > c1) {
+                    // 检测到两个拐点：[0,c1]=右侧, [c1+1,c2]=横边, [c2+1,end]=左侧
+                    result.smallURight.addAll(shape.subList(0, c1 + 1));
+                    result.smallUBottom.addAll(shape.subList(c1 + 1, c2 + 1));
+                    result.smallULeft.addAll(shape.subList(c2 + 1, shape.size()));
+                } else if (c1 > 0) {
+                    // 只检测到一个拐点：[0,c1]=右侧, [c1+1,end]=横边+左侧（按Y分）
+                    result.smallURight.addAll(shape.subList(0, c1 + 1));
+                    splitByY(shape.subList(c1 + 1, shape.size()), result);
+                } else {
+                    // 未检测到拐点，按Y坐标直接分类
+                    splitByY(shape, result);
+                }
+            } else if ((double) countY14 / shape.size() >= 0.7) {
+                // 提取过渡点（Y不在14±0.5范围）到横边，使小U底部不被左右边吞并
+                for (PointDTO p : shape) {
+                    if (Math.abs(p.getOriginalY() - 14.0) <= 0.5) {
+                        result.smallULeft.add(p);
+                    } else {
+                        result.smallUBottom.add(p);
+                    }
+                }
+            } else if ((double) countY23 / shape.size() >= 0.7) {
+                // 提取过渡点到横边
+                for (PointDTO p : shape) {
+                    if (Math.abs(p.getOriginalY() - 23.0) <= 0.5) {
+                        result.smallURight.add(p);
+                    } else {
+                        result.smallUBottom.add(p);
+                    }
+                }
+            } else if (maxY - minY > 1.0 && minY >= 13.0 && maxY <= 24.0) {
                 result.smallUBottom.addAll(shape);
             }
-            // 其他情况忽略（可能是噪声数据）
         }
 
         // 对小U各边重新编号pointIndex
@@ -276,8 +325,33 @@ public class EdgeSplitter {
     }
 
     /**
+     * 按Y坐标将点列表直接分类到小U各边（无拐点时的降级处理）
+     */
+    private static void splitByY(List<PointDTO> points, EdgeResult result) {
+        for (PointDTO p : points) {
+            double y = p.getOriginalY();
+            if (Math.abs(y - 14.0) <= 1.5) {
+                result.smallULeft.add(p);
+            } else if (Math.abs(y - 23.0) <= 1.5) {
+                result.smallURight.add(p);
+            } else if (y > 14.0 && y < 23.0) {
+                result.smallUBottom.add(p);
+            }
+        }
+    }
+
+    /**
      * 判断一个shape是否是大U合并的一部分（用于25号排体）
      */
+    /** 统计点列表中 Y 坐标接近 targetY（容差 ±0.5）的点数 */
+    private static int countNearY(List<PointDTO> points, double targetY) {
+        int count = 0;
+        for (PointDTO p : points) {
+            if (Math.abs(p.getOriginalY() - targetY) <= 0.5) count++;
+        }
+        return count;
+    }
+
     private static boolean isPartOfLargeU(List<PointDTO> shape, List<PointDTO> largeU) {
         if (largeU == null || shape == null || shape.isEmpty() || largeU.isEmpty()) {
             return false;

@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ThinPlateSplineInterpolator {
 
-    private static final int MAX_CONTROL_POINTS = 500;
+    private static final int MAX_CONTROL_POINTS = 800;
 
     private double[] weights;
     private double[] polyCoeffs;
@@ -59,8 +59,8 @@ public class ThinPlateSplineInterpolator {
         double[][] A = new double[m][m];
         double[] b = new double[m];
 
-        // 正则化参数（防止矩阵奇异）
-        double lambda = 1e-4;
+        // 正则化参数（防止矩阵奇异，值越小曲面越贴合控制点）
+        double lambda = 1e-6;
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
